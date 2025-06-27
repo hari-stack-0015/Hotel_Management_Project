@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grand Horizon Hotels - Management Portal</title>
+  <link rel="icon" href="lsl.png"> 
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --primary-color: #2c3e50;
+      --secondary-color: #3498db;
+      --accent-color: #e74c3c;
+      --light-color: #ecf0f1;
+      --dark-color: #2c3e50;
+      --success-color: #27ae60;
+      --warning-color: #f39c12;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background: url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: var(--dark-color);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: -1;
+    }
+
+    .login-container {
+      background: rgba(255, 255, 255, 0.97);
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 450px;
+      text-align: center;
+      animation: fadeIn 0.8s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .login-container::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--secondary-color), var(--primary-color));
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 15px;
+      background-color: var(--primary-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .login-container h2 {
+      margin-bottom: 25px;
+      color: var(--primary-color);
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+
+    .login-container h3 {
+      margin-bottom: 30px;
+      color: #555;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 25px;
+      text-align: left;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      color: var(--primary-color);
+      font-weight: 500;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 14px 45px 14px 15px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .input-group input:focus {
+      border-color: var(--secondary-color);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    }
+
+    .input-group i {
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
+      color: #aaa;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .input-group i:hover {
+      color: var(--primary-color);
+    }
+
+    .login-container button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .login-container button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .login-container button:active {
+      transform: translateY(0);
+    }
+
+    .login-container .options {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0;
+      font-size: 0.9rem;
+    }
+
+    .login-container .options a {
+      color: var(--secondary-color);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .login-container .options a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    .login-container .divider {
+      display: flex;
+      align-items: center;
+      margin: 25px 0;
+      color: #999;
+      font-size: 0.9rem;
+    }
+
+    .login-container .divider::before,
+    .login-container .divider::after {
+      content: "";
+      flex: 1;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .login-container .divider::before {
+      margin-right: 10px;
+    }
+
+    .login-container .divider::after {
+      margin-left: 10px;
+    }
+
+    .social-login {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .social-btn {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .social-btn.google {
+      background-color: #DB4437;
+    }
+
+    .social-btn.facebook {
+      background-color: #4267B2;
+    }
+
+    .social-btn.microsoft {
+      background-color: #00A1F1;
+    }
+
+    .login-container p.signup {
+      margin-top: 25px;
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    .login-container p.signup a {
+      color: var(--secondary-color);
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .login-container p.signup a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    .loader {
+      display: none;
+      margin: 15px auto;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid var(--secondary-color);
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent-color);
+      color: white;
+      padding: 14px 25px;
+      border-radius: 8px;
+      display: none;
+      animation: fadeIn 0.5s ease;
+      font-size: 0.95rem;
+      font-weight: 500;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      z-index: 1000;
+    }
+
+    .password-strength {
+      height: 4px;
+      background: #eee;
+      border-radius: 2px;
+      margin-top: 8px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .password-strength::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 0%;
+      background: var(--accent-color);
+      transition: width 0.3s ease, background 0.3s ease;
+    }
+
+    .password-strength[data-strength="1"]::before {
+      width: 25%;
+      background: var(--accent-color);
+    }
+
+    .password-strength[data-strength="2"]::before {
+      width: 50%;
+      background: var(--warning-color);
+    }
+
+    .password-strength[data-strength="3"]::before {
+      width: 75%;
+      background: #f1c40f;
+    }
+
+    .password-strength[data-strength="4"]::before {
+      width: 100%;
+      background: var(--success-color);
+    }
+
+    .language-selector {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    .language-selector select {
+      padding: 5px 10px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      background-color: white;
+      color: var(--primary-color);
+      font-size: 0.85rem;
+    }
+
+    /* Responsive improvements */
+    @media (max-width: 480px) {
+      .login-container {
+        padding: 30px 20px;
+      }
+
+      .login-container h2 {
+        font-size: 1.5rem;
+      }
+
+      .input-group input {
+        font-size: 0.95rem;
+        padding: 12px 40px 12px 12px;
+      }
+
+      .login-container button {
+        font-size: 0.95rem;
+        padding: 12px;
+      }
+
+      .logo {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
+      }
+    }
+
+    /* Accessibility focus styles */
+    a:focus, button:focus, input:focus, select:focus {
+      outline: 3px solid rgba(52, 152, 219, 0.5);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="login-container">
+    <div class="language-selector">
+      <select id="language">
+        <option value="en">English</option>
+        <option value="es">Español</option>
+        <option value="fr">Français</option>
+        <option value="de">Deutsch</option>
+      </select>
+    </div>
+    
+    <div class="logo">
+      <i class="fas fa-hotel"></i>
+    </div>
+    
+    <h2>Grand Horizon Hotels</h2>
+    <h3>Management Portal</h3>
+    
+    <form id="loginForm">
+      <div class="input-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="Enter your username" required />
+        <i class="fas fa-user"></i>
+      </div>
+      
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter your password" required />
+        <i class="fas fa-eye-slash" id="togglePassword"></i>
+        <div class="password-strength" id="passwordStrength"></div>
+      </div>
+      
+      <div class="options">
+        <div>
+          <input type="checkbox" id="remember" />
+          <label for="remember">Remember me</label>
+        </div>
+        <a href="#" id="forgotPassword">Forgot password?</a>
+      </div>
+      
+      <button type="button" id="loginBtn" onclick="validateLogin()">
+        <span id="btnText">Login</span>
+      </button>
+      <div class="loader" id="loader"></div>
+      
+      <div class="divider">or continue with</div>
+      
+      <div class="social-login">
+        <div class="social-btn google" title="Sign in with Google">
+          <i class="fab fa-google"></i>
+        </div>
+        <div class="social-btn facebook" title="Sign in with Facebook">
+          <i class="fab fa-facebook-f"></i>
+        </div>
+        <div class="social-btn microsoft" title="Sign in with Microsoft">
+          <i class="fab fa-microsoft"></i>
+        </div>
+      </div>
+    </form>
+    
+    <p class="signup">New to our system? <a href="#" id="signupLink">Request access</a></p>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // DOM Elements
+    const togglePassword = document.getElementById("togglePassword");
+    const passwordInput = document.getElementById("password");
+    const loginBtn = document.getElementById("loginBtn");
+    const btnText = document.getElementById("btnText");
+    const passwordStrength = document.getElementById("passwordStrength");
+    const forgotPasswordLink = document.getElementById("forgotPassword");
+    const signupLink = document.getElementById("signupLink");
+    const languageSelector = document.getElementById("language");
+
+    // Toggle password visibility
+    togglePassword.addEventListener("click", () => {
+      const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+      passwordInput.setAttribute("type", type);
+      togglePassword.classList.toggle("fa-eye");
+      togglePassword.classList.toggle("fa-eye-slash");
+    });
+
+    // Password strength indicator
+    passwordInput.addEventListener("input", () => {
+      const password = passwordInput.value;
+      let strength = 0;
+      
+      if (password.length > 0) strength++; // Not empty
+      if (password.length >= 6) strength++; // Minimum length
+      if (/[A-Z]/.test(password)) strength++; // Contains uppercase
+      if (/[0-9]/.test(password)) strength++; // Contains number
+      if (/[^A-Za-z0-9]/.test(password)) strength++; // Contains special char
+      
+      passwordStrength.setAttribute("data-strength", Math.min(strength, 4));
+    });
+
+    // Show toast message
+    function showToast(message, type = "error") {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.style.display = "block";
+      
+      // Change color based on type
+      if (type === "success") {
+        toast.style.backgroundColor = "#27ae60";
+      } else if (type === "warning") {
+        toast.style.backgroundColor = "#f39c12";
+      } else {
+        toast.style.backgroundColor = "#e74c3c";
+      }
+      
+      setTimeout(() => {
+        toast.style.display = "none";
+      }, 3000);
+    }
+
+    // Simulate login validation
+    function validateLogin() {
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const loader = document.getElementById("loader");
+      const rememberMe = document.getElementById("remember").checked;
+
+      // Simple validation
+      if (!username || !password) {
+        showToast("Please enter both username and password");
+        return;
+      }
+
+      // Show loading state
+      loginBtn.disabled = true;
+      btnText.textContent = "Authenticating...";
+      loader.style.display = "block";
+
+      // Simulate API call
+      setTimeout(() => {
+        // Mock credentials (in a real app, this would be a server-side check)
+        const correctUsername = "hari";
+        const correctPassword = "0000";
+
+        if (username === correctUsername && password === correctPassword) {
+          showToast("Login successful! Redirecting...", "success");
+          
+          // In a real app, you would store the token or session
+          if (rememberMe) {
+            localStorage.setItem("rememberUser", "true");
+          }
+          
+          // Redirect to dashboard
+          setTimeout(() => {
+            window.location.href = "homepage.html";
+          }, 1500);
+        } else {
+          showToast("Invalid credentials. Please try again.");
+          loginBtn.disabled = false;
+          btnText.textContent = "Login";
+          loader.style.display = "none";
+        }
+      }, 1500);
+    }
+
+    // Handle form submission on Enter key
+    document.getElementById("loginForm").addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        validateLogin();
+      }
+    });
+
+    // Forgot password handler
+    forgotPasswordLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      const email = prompt("Please enter your registered email address:");
+      if (email) {
+        // In a real app, you would send a reset link to this email
+        showToast(`Password reset link sent to ${email}`, "success");
+      }
+    });
+
+    // Signup link handler
+    signupLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      showToast("Please contact your system administrator for access", "warning");
+    });
+
+    // Language selector handler
+    languageSelector.addEventListener("change", (e) => {
+      // In a real app, this would change the language of the interface
+      showToast(`Language changed to ${e.target.options[e.target.selectedIndex].text}`, "success");
+    });
+
+    // Check if user wanted to be remembered
+    if (localStorage.getItem("rememberUser") === "true") {
+      document.getElementById("remember").checked = true;
+      // In a real app, you might auto-fill the username or attempt auto-login
+    }
+  </script>
+</body>
+</html>

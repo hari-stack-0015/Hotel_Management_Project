@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The Taste Tale - Premium dining experience with authentic flavors and exceptional service">
+  <title>The Taste Tale | Fine Dining Restaurant</title>
+
+  <!-- Bootstrap & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #e67e22;
+      --secondary-color: #2c3e50;
+      --accent-color: #e74c3c;
+      --light-color: #f8f9fa;
+      --dark-color: #343a40;
+    }
+    
+    body {
+      scroll-behavior: smooth;
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+    }
+    
+    h1, h2, h3, h4, h5, .navbar-brand {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+    }
+
+    .navbar {
+      background-color: rgba(0, 0, 0, 0.9);
+      transition: all 0.3s ease;
+      padding: 15px 0;
+    }
+    
+    .navbar.scrolled {
+      padding: 10px 0;
+      background-color: rgba(0, 0, 0, 0.95) !important;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .navbar-brand {
+      font-size: 1.8rem;
+      color: var(--primary-color) !important;
+    }
+
+    .nav-link {
+      font-weight: 500;
+      margin: 0 8px;
+      position: relative;
+    }
+
+    .nav-link:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--primary-color);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover:after {
+      width: 100%;
+    }
+
+    .hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                  url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092') no-repeat center center/cover;
+      height: 100vh;
+      min-height: 600px;
+      position: relative;
+      color: white;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .hero h1 {
+      font-size: 4.5rem;
+      margin-bottom: 20px;
+      animation: fadeInDown 1.2s ease;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    }
+
+    .hero p {
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+      animation: fadeInUp 1.2s ease;
+    }
+
+    .section-title {
+      position: relative;
+      margin-bottom: 50px;
+      text-align: center;
+    }
+
+    .section-title:after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 4px;
+      background: var(--primary-color);
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* About Section */
+    #about {
+      background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), 
+                  url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4') center/cover;
+      padding: 100px 0;
+    }
+
+    /* Menu Section */
+    .menu-card {
+      transition: all 0.3s ease;
+      border: none;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+
+    .menu-card .card-body {
+      padding: 20px;
+    }
+
+    .menu-card .price {
+      color: var(--accent-color);
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+
+    .menu-card .badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background-color: var(--accent-color);
+    }
+
+    /* Testimonials */
+    .testimonial-card {
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      margin: 15px;
+      position: relative;
+    }
+
+    .testimonial-card:before {
+      content: '"';
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 60px;
+      color: rgba(0,0,0,0.1);
+      font-family: serif;
+    }
+
+    .testimonial-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid white;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      margin-bottom: 15px;
+    }
+
+    /* Gallery */
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .gallery-item img {
+      transition: transform 0.5s ease;
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    /* Reservation */
+    #reservation {
+      background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+                  url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0') center/cover;
+      padding: 100px 0;
+    }
+
+    .form-control {
+      padding: 12px 15px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--secondary-color);
+      padding: 50px 0 20px;
+    }
+
+    .footer-links h5 {
+      margin-bottom: 20px;
+      color: white;
+    }
+
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: #ddd;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    .social-icons a {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      text-align: center;
+      line-height: 40px;
+      color: white;
+      margin-right: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      background: var(--primary-color);
+      transform: translateY(-5px);
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: var(--primary-color);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      z-index: 99;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .back-to-top.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Opening Hours */
+    .hours-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .hours-list li {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px dashed rgba(255,255,255,0.1);
+    }
+
+    /* Special Offers */
+    .special-offer-card {
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      height: 100%;
+    }
+    
+    .special-offer-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    }
+    
+    .offer-ribbon {
+      position: absolute;
+      top: 15px;
+      right: -30px;
+      background: var(--accent-color);
+      color: white;
+      padding: 5px 30px;
+      transform: rotate(45deg);
+      font-weight: 600;
+      font-size: 0.8rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    
+    .bg-gradient-primary {
+      background: linear-gradient(135deg, var(--primary-color), #d35400);
+    }
+
+    /* Floating WhatsApp Button */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      background: #25D366;
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      color: white;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+      }
+
+      .menu-card img {
+        height: 200px;
+      }
+      
+      .footer-content {
+        padding: 30px 0;
+      }
+      
+      .footer-heading {
+        margin-top: 20px;
+      }
+      
+      .footer-heading::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+
+    @keyframes fadeInDown {
+      from {opacity: 0; transform: translateY(-20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes fadeInUp {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    /* Footer Styles */
+    .footer-section {
+      background-color: var(--secondary-color);
+      color: #ddd;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .footer-content {
+      padding: 50px 0;
+    }
+    
+    .footer-brand h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: white;
+      font-size: 1.8rem;
+    }
+    
+    .footer-description {
+      color: #aaa;
+      line-height: 1.6;
+    }
+    
+    .footer-heading {
+      color: white;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .footer-heading::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 50px;
+      height: 2px;
+      background-color: var(--primary-color);
+    }
+    
+    .footer-links {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+    
+    .footer-link {
+      color: #ddd;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-block;
+      position: relative;
+    }
+    
+    .footer-link:hover {
+      color: var(--primary-color);
+      transform: translateX(5px);
+    }
+    
+    .footer-link::before {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 1px;
+      bottom: -2px;
+      left: 0;
+      background-color: var(--primary-color);
+      transition: width 0.3s ease;
+    }
+    
+    .footer-link:hover::before {
+      width: 100%;
+    }
+    
+    .footer-contact-info {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .contact-item {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: flex-start;
+    }
+    
+    .contact-icon {
+      color: var(--primary-color);
+      margin-right: 10px;
+      margin-top: 3px;
+      min-width: 20px;
+    }
+    
+    .social-icons {
+      display: flex;
+      gap: 12px;
+    }
+    
+    .social-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+    
+    .social-icon:hover {
+      background-color: var(--primary-color);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(230, 126, 34, 0.3);
+    }
+    
+    .footer-divider {
+      border-color: rgba(255, 255, 255, 0.1);
+      margin: 20px 0;
+    }
+    
+    .footer-bottom {
+      padding: 20px 0 0;
+    }
+    
+    .copyright-text {
+      color: #aaa;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+    
+    .design-credit {
+      color: #aaa;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+    
+    .heart-icon {
+      color: var(--accent-color);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- WhatsApp Float Button -->
+  <a href="https://wa.me/1234567890" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Back to Top Button -->
+  <a href="#" class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </a>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">The Taste Tale</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+          <li class="nav-item"><a href="#menu" class="nav-link">Menu</a></li>
+          <li class="nav-item"><a href="#testimonials" class="nav-link">Reviews</a></li>
+          <li class="nav-item"><a href="#gallery" class="nav-link">Gallery</a></li>
+          <li class="nav-item"><a href="#reservation" class="nav-link">Reservation</a></li>
+          <li class="nav-item">
+            <a href="ordernow.html" class="btn btn-primary ms-3">Order Online</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>Delight in Every Bite</h1>
+      <p>Where Flavors Tell Stories and Memories Are Made</p>
+      <div class="mt-4">
+        <a href="#reservation" class="btn btn-primary btn-lg px-4 me-3">Reserve a Table</a>
+        <a href="#menu" class="btn btn-outline-light btn-lg px-4">View Menu</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Us -->
+  <section id="about" class="py-5">
+    <div class="container">
+      <h2 class="section-title">Our Story</h2>
+      <div class="row align-items-center">
+        
+        <!-- Left Image -->
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <div class="position-relative">
+            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5" alt="Restaurant Interior" class="img-fluid rounded-4 shadow-lg">
+            <div class="position-absolute bottom-0 start-0 bg-white p-3 m-3 rounded shadow-sm">
+              <h5 class="mb-0 text-dark">Since 1995</h5>
+              <p class="mb-0 text-muted">Serving authentic flavors</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Content -->
+        <div class="col-lg-6">
+          <h3 class="mb-3">Welcome to <span class="text-primary">The Taste Tale</span></h3>
+          <p class="lead">Every dish tells a story. From our humble beginnings to becoming a culinary landmark, we've dedicated ourselves to crafting unforgettable experiences for our guests.</p>
+          
+          <div class="row mt-4">
+            <div class="col-md-6 mb-4">
+              <div class="d-flex">
+                <div class="me-3 text-primary">
+                  <i class="bi bi-award-fill fs-2"></i>
+                </div>
+                <div>
+                  <h5>Award Winning</h5>
+                  <p class="mb-0">Recognized for culinary excellence</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-4">
+              <div class="d-flex">
+                <div class="me-3 text-primary">
+                  <i class="bi bi-basket-fill fs-2"></i>
+                </div>
+                <div>
+                  <h5>Fresh Ingredients</h5>
+                  <p class="mb-0">Locally sourced, organic produce</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-4">
+              <div class="d-flex">
+                <div class="me-3 text-primary">
+                  <i class="bi bi-emoji-heart-eyes-fill fs-2"></i>
+                </div>
+                <div>
+                  <h5>Passionate Chefs</h5>
+                  <p class="mb-0">Expert culinary team</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-4">
+              <div class="d-flex">
+                <div class="me-3 text-primary">
+                  <i class="bi bi-cup-hot-fill fs-2"></i>
+                </div>
+                <div>
+                  <h5>Perfect Ambience</h5>
+                  <p class="mb-0">Elegant and comfortable setting</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <a href="#menu" class="btn btn-outline-primary mt-2">Explore Our Menu</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Special Offers -->
+  <section class="py-5">
+    <div class="container">
+      <h2 class="section-title">Special Offers</h2>
+      <p class="text-center mb-5">Indulge in our exclusive dining experiences</p>
+      
+      <div class="row g-4">
+        <!-- Weekend Brunch Offer -->
+        <div class="col-lg-6">
+          <div class="special-offer-card bg-gradient-primary text-white rounded-4 overflow-hidden position-relative">
+            <div class="offer-ribbon">Weekend Special</div>
+            <div class="row g-0 h-100">
+              <div class="col-md-7 p-4 p-lg-5 d-flex flex-column">
+                <div class="mb-auto">
+                  <h3 class="mb-3">Gourmet Brunch Experience</h3>
+                  <p class="mb-4">Savor our lavish weekend brunch with live cooking stations, artisanal cheeses, fresh seafood, and unlimited premium beverages.</p>
+                  <div class="d-flex align-items-center mb-3">
+                    <span class="bg-white text-primary rounded-pill px-3 py-1 me-3 fw-bold">25% OFF</span>
+                    <span class="text-white-50"><del>$59.99</del></span>
+                    <span class="text-white fw-bold fs-4 ms-2">$44.99</span>
+                  </div>
+                </div>
+                <div>
+                  <p class="small mb-3"><i class="fas fa-calendar-alt me-2"></i> Every Saturday & Sunday</p>
+                  <p class="small mb-0"><i class="fas fa-clock me-2"></i> 10:00 AM - 2:00 PM</p>
+                </div>
+              </div>
+              <div class="col-md-5 d-none d-md-block">
+                <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2" alt="Brunch Buffet" class="img-fluid h-100 object-fit-cover">
+              </div>
+            </div>
+            <a href="#reservation" class="stretched-link"></a>
+          </div>
+        </div>
+        
+        <!-- Happy Hour Offer -->
+        <div class="col-lg-6">
+          <div class="special-offer-card bg-dark text-white rounded-4 overflow-hidden position-relative">
+            <div class="offer-ribbon">Happy Hour</div>
+            <div class="row g-0 h-100">
+              <div class="col-md-7 p-4 p-lg-5 d-flex flex-column">
+                <div class="mb-auto">
+                  <h3 class="mb-3">Sunset Social Hour</h3>
+                  <p class="mb-4">Unwind with handcrafted cocktails, premium wines, and chef's selection of small plates at special prices.</p>
+                  <div class="d-flex align-items-center mb-3">
+                    <span class="bg-primary text-white rounded-pill px-3 py-1 me-3 fw-bold">40% OFF</span>
+                    <span class="text-white-50"><del>$8-15</del></span>
+                    <span class="text-white fw-bold fs-4 ms-2">$5-9</span>
+                  </div>
+                </div>
+                <div>
+                  <p class="small mb-3"><i class="fas fa-calendar-alt me-2"></i> Monday - Friday</p>
+                  <p class="small mb-0"><i class="fas fa-clock me-2"></i> 4:00 PM - 6:30 PM</p>
+                </div>
+              </div>
+              <div class="col-md-5 d-none d-md-block">
+                <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b" alt="Cocktails" class="img-fluid h-100 object-fit-cover">
+              </div>
+            </div>
+            <a href="#reservation" class="stretched-link"></a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-5">
+        <a href="#offers" class="btn btn-outline-primary btn-lg px-4">View All Offers</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu -->
+  <section id="menu" class="py-5">
+    <div class="container">
+      <h2 class="section-title">Our Signature Dishes</h2>
+      <p class="text-center mb-5">Experience our carefully curated selection of culinary masterpieces</p>
+      
+      <ul class="nav nav-tabs justify-content-center mb-5" id="menuTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="starters-tab" data-bs-toggle="tab" data-bs-target="#starters" type="button">Starters</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="mains-tab" data-bs-toggle="tab" data-bs-target="#mains" type="button">Main Courses</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="desserts-tab" data-bs-toggle="tab" data-bs-target="#desserts" type="button">Desserts</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="drinks-tab" data-bs-toggle="tab" data-bs-target="#drinks" type="button">Drinks</button>
+        </li>
+      </ul>
+
+      <div class="tab-content" id="menuTabsContent">
+        <div class="tab-pane fade show active" id="starters" role="tabpanel">
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+              <div class="card menu-card h-100">
+                <span class="badge bg-success">Vegan</span>
+                <img src="https://plus.unsplash.com/premium_photo-1677686707466-2c86b174d072?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8VG9tYXRvJTIwQnJ1c2NoZXR0YXxlbnwwfHwwfHx8MA%3D%3D" class="card-img-top" alt="Bruschetta">
+                <div class="card-body d-flex flex-column">
+                  <div class="d-flex justify-content-between align-items-start mb-2">
+                    <h5 class="card-title mb-0">Tomato Bruschetta</h5>
+                    <span class="price">$8.99</span>
+                  </div>
+                  <p class="card-text">Toasted bread topped with tomatoes, garlic, and fresh basil</p>
+                  <div class="mt-auto">
+                    <button class="btn btn-sm btn-outline-primary">Add to Order</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+              <div class="card menu-card h-100">
+                <img src="https://media.istockphoto.com/id/2160683562/photo/asian-deep-fried-spring-roll-filling-with-cabbage-carrot-and-glass-noodles.webp?a=1&b=1&s=612x612&w=0&k=20&c=S6JV2t6IiPKRJOMAkmdvYnSPz9nHhlunOe_TwgebIv0=" class="card-img-top" alt="Spring Rolls">
+                <div class="card-body d-flex flex-column">
+                  <div class="d-flex justify-content-between align-items-start mb-2">
+                    <h5 class="card-title mb-0">Crispy Spring Rolls</h5>
+                    <span class="price">$7.99</span>
+                  </div>
+                  <p class="card-text">Vegetable spring rolls with sweet chili dipping sauce</p>
+                  <div class="mt-auto">
+                    <button class="btn btn-sm btn-outline-primary">Add to Order</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+              <div class="card menu-card h-100">
+                <span class="badge bg-danger">Spicy</span>
+                <img src="https://images.unsplash.com/photo-1734987942068-a1a459d65d3d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8QnVmZmFsbyUyMFdpbmdzfGVufDB8fDB8fHww" class="card-img-top" alt="Chicken Wings">
+                <div class="card-body d-flex flex-column">
+                  <div class="d-flex justify-content-between align-items-start mb-2">
+                    <h5 class="card-title mb-0">Buffalo Wings</h5>
+                    <span class="price">$10.99</span>
+                  </div>
+                  <p class="card-text">Crispy chicken wings tossed in our signature buffalo sauce</p>
+                  <div class="mt-auto">
+                    <button class="btn btn-sm btn-outline-primary">Add to Order</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="tab-pane fade" id="mains" role="tabpanel">
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+              <div class="card menu-card h-100">
+                <img src="https://images.unsplash.com/photo-1546964124-0cce460f38ef?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8UmliZXllJTIwU3RlYWt8ZW58MHx8MHx8fDA%3D" class="card-img-top" alt="Steak">
+                <div class="card-body d-flex flex-column">
+                  <div class="d-flex justify-content-between align-items-start mb-2">
+                    <h5 class="card-title mb-0">Ribeye Steak</h5>
+                    <span class="price">$24.99</span>
+                  </div>
+                  <p class="card-text">12oz grass-fed ribeye with roasted vegetables and mashed potatoes</p>
+                  <div class="mt-auto">
+                    <button class="btn btn-sm btn-outline-primary">Add to Order</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+              <div class="card menu-card h-100">
+                <span class="badge bg-success">Vegan</span>
+                <img src="https://media.istockphoto.com/id/155152730/photo/creamy-pasta-with-shaved-truffles.webp?a=1&b=1&s=612x612&w=0&k=20&c=lFmcKiDHsKhaZfYrIssZWkOhwPm1zU-AhKWihtqb2z8=" class="card-img-top" alt="Pasta">
+                <div class="card-body d-flex flex-column">
+                  <div class="d-flex justify-content-between align-items-start mb-2">
+                    <h5 class="card-title mb-0">Truffle Pasta</h5>
+                    <span class="price">$16.99</span>
+                  </div>
+                  <p class="card-text">Homemade pasta with wild mushrooms and truffle oil</p>
+                  <div class="mt-auto">
+                    <button class="btn btn-sm btn-outline-primary">Add to Order</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+              <div class="card menu-card h-100">
+                <img src="https://media.istockphoto.com/id/175028181/photo/fillet-of-salmon-with-vegetable.webp?a=1&b=1&s=612x612&w=0&k=20&c=d-Z0taRnxiqpIjIF3ClMy4_nwPwn49ib-Vq7gwE6_HM=" class="card-img-top" alt="Salmon">
+                <div class="card-body d-flex flex-column">
+                  <div class="d-flex justify-content-between align-items-start mb-2">
+                    <h5 class="card-title mb-0">Grilled Salmon</h5>
+                    <span class="price">$22.99</span>
+                  </div>
+                  <p class="card-text">Fresh Atlantic salmon with lemon butter sauce and asparagus</p>
+                  <div class="mt-auto">
+                    <button class="btn btn-sm btn-outline-primary">Add to Order</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Other menu tabs content would go here -->
+      </div>
+
+      <div class="text-center mt-5">
+        <a href="menu.html" class="btn btn-primary btn-lg px-4">View Full Menu</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="section-title">What Our Guests Say</h2>
+      <p class="text-center mb-5">Don't just take our word for it - hear from our satisfied customers</p>
+
+      <div class="row">
+        <div class="col-lg-4 mb-4">
+          <div class="testimonial-card h-100">
+            <div class="text-center mb-3">
+              <img src="https://randomuser.me/api/portraits/women/45.jpg" class="testimonial-img" alt="Customer">
+            </div>
+            <p class="mb-4">"The food was absolutely incredible! Every dish we tried was packed with flavor and beautifully presented. The service was impeccable too."</p>
+            <div class="text-center">
+              <h5 class="mb-1">Sarah Johnson</h5>
+              <small class="text-muted">Food Blogger</small>
+              <div class="text-warning mt-2">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 mb-4">
+          <div class="testimonial-card h-100">
+            <div class="text-center mb-3">
+              <img src="https://randomuser.me/api/portraits/men/32.jpg" class="testimonial-img" alt="Customer">
+            </div>
+            <p class="mb-4">"I've dined at many restaurants around the world, and The Taste Tale stands out for its creative menu and exceptional service. A must-visit!"</p>
+            <div class="text-center">
+              <h5 class="mb-1">Michael Chen</h5>
+              <small class="text-muted">Travel Writer</small>
+              <div class="text-warning mt-2">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 mb-4">
+          <div class="testimonial-card h-100">
+            <div class="text-center mb-3">
+              <img src="https://randomuser.me/api/portraits/women/68.jpg" class="testimonial-img" alt="Customer">
+            </div>
+            <p class="mb-4">"Perfect spot for our anniversary dinner. The ambiance was romantic, the food exquisite, and the staff made us feel so special. We'll be back!"</p>
+            <div class="text-center">
+              <h5 class="mb-1">Emily Rodriguez</h5>
+              <small class="text-muted">Local Guide</small>
+              <div class="text-warning mt-2">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery" class="py-5">
+    <div class="container">
+      <h2 class="section-title">Gallery</h2>
+      <p class="text-center mb-5">A glimpse into our culinary world</p>
+      
+      <div class="row g-3">
+        <div class="col-md-4 col-6">
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947" class="img-fluid" alt="Dining Area">
+            <div class="gallery-overlay">
+              <i class="fas fa-search-plus text-white fs-3"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-6">
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5" class="img-fluid" alt="Restaurant Interior">
+            <div class="gallery-overlay">
+              <i class="fas fa-search-plus text-white fs-3"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-6">
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4" class="img-fluid" alt="Chef Cooking">
+            <div class="gallery-overlay">
+              <i class="fas fa-search-plus text-white fs-3"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-6">
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1547592180-85f173990554" class="img-fluid" alt="Dessert">
+            <div class="gallery-overlay">
+              <i class="fas fa-search-plus text-white fs-3"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-6">
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0" class="img-fluid" alt="Bar Area">
+            <div class="gallery-overlay">
+              <i class="fas fa-search-plus text-white fs-3"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-6">
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1559847844-5315695dadae" class="img-fluid" alt="Outdoor Seating">
+            <div class="gallery-overlay">
+              <i class="fas fa-search-plus text-white fs-3"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reservation -->
+  <section id="reservation" class="py-5">
+    <div class="container">
+      <h2 class="section-title">Make a Reservation</h2>
+      <p class="text-center mb-5">Book your table in advance for a seamless dining experience</p>
+      
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <form class="row g-3" action="ReservationServlet" method="POST">
+            <div class="col-md-6">
+              <input type="text" class="form-control" name="name" placeholder="Your Name" required>
+            </div>
+            <div class="col-md-6">
+              <input type="email" class="form-control" name="email" placeholder="Email" required>
+            </div>
+            <div class="col-md-6">
+              <input type="tel" class="form-control" name="phone" placeholder="Phone Number" required>
+            </div>
+            <div class="col-md-6">
+              <select class="form-select" name="guests" required>
+                <option value="" selected disabled>Number of Guests</option>
+                <option value="1">1 Person</option>
+                <option value="2">2 People</option>
+                <option value="3">3 People</option>
+                <option value="4">4 People</option>
+                <option value="5">5 People</option>
+                <option value="6">6+ People</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <input type="date" class="form-control" name="date" required>
+            </div>
+            <div class="col-md-6">
+              <input type="time" class="form-control" name="time" required>
+            </div>
+            <div class="col-12">
+              <textarea class="form-control" name="specialRequests" rows="3" placeholder="Special Requests (Optional)"></textarea>
+            </div>
+            <div class="col-12 text-center">
+              <button type="submit" class="btn btn-primary btn-lg px-4">Book Table</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Opening Hours -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <h3 class="mb-4">Opening Hours</h3>
+          <ul class="hours-list">
+            <li><span>Monday - Thursday</span> <span>11:00 AM - 10:00 PM</span></li>
+            <li><span>Friday - Saturday</span> <span>11:00 AM - 11:00 PM</span></li>
+            <li><span>Sunday</span> <span>10:00 AM - 9:00 PM</span></li>
+          </ul>
+          <div class="mt-4">
+            <h5 class="mb-3">Happy Hours</h5>
+            <p>Monday - Friday: 3:00 PM - 6:00 PM</p>
+            <p>Enjoy 20% off all drinks and appetizers</p>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="ratio ratio-16x9">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.215209179035!2d-73.987844924239!3d40.75798597932678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855c6480299%3A0x55194ec5a1ae072e!2sTimes%20Square!5e0!3m2!1sen!2sus!4v1623251234567!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
+          </div>
+          <div class="mt-3">
+            <h5 class="mb-2">Location</h5>
+            <p>123 Gourmet Avenue, Culinary District, NY 10001</p>
+            <a href="https://maps.google.com" class="btn btn-sm btn-outline-primary">Get Directions</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="py-5 bg-primary text-white">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+          <h3 class="mb-3">Join Our Culinary Journey</h3>
+          <p class="mb-4">Subscribe to our newsletter for exclusive offers, events, and culinary insights</p>
+          <form class="row g-2 justify-content-center">
+            <div class="col-md-8">
+              <input type="email" class="form-control" placeholder="Your Email Address" required>
+            </div>
+            <div class="col-md-4">
+              <button type="submit" class="btn btn-dark w-100">Subscribe</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer-section">
+    <div class="container">
+      <div class="footer-content pt-5 pb-4">
+        <div class="row g-4 g-lg-5">
+          <!-- Brand Column -->
+          <div class="col-lg-4">
+            <div class="footer-brand">
+              <h2 class="text-white mb-3">The Taste Tale</h2>
+              <p class="footer-description">Where every meal tells a story and every guest becomes part of our culinary narrative.</p>
+              <div class="social-icons mt-4">
+                <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon" aria-label="Yelp"><i class="fab fa-yelp"></i></a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Quick Links Column -->
+          <div class="col-lg-2 col-md-4">
+            <h3 class="footer-heading">Quick Links</h3>
+            <ul class="footer-links">
+              <li><a href="#home" class="footer-link">Home</a></li>
+              <li><a href="#about" class="footer-link">About Us</a></li>
+              <li><a href="#menu" class="footer-link">Menu</a></li>
+              <li><a href="#gallery" class="footer-link">Gallery</a></li>
+              <li><a href="#reservation" class="footer-link">Reservations</a></li>
+            </ul>
+          </div>
+          
+          <!-- Contact Column -->
+          <div class="col-lg-3 col-md-4">
+            <h3 class="footer-heading">Contact Us</h3>
+            <ul class="footer-contact-info">
+              <li class="contact-item">
+                <i class="fas fa-map-marker-alt contact-icon"></i>
+                <span>123 Gourmet Avenue, New York, NY 10001</span>
+              </li>
+              <li class="contact-item">
+                <i class="fas fa-phone contact-icon"></i>
+                <a href="tel:5551234567" class="footer-link">(555) 123-4567</a>
+              </li>
+              <li class="contact-item">
+                <i class="fas fa-envelope contact-icon"></i>
+                <a href="mailto:info@thetastetale.com" class="footer-link">info@thetastetale.com</a>
+              </li>
+            </ul>
+          </div>
+          
+          <!-- Legal Column -->
+          <div class="col-lg-3 col-md-4">
+            <h3 class="footer-heading">Legal</h3>
+            <ul class="footer-links">
+              <li><a href="#" class="footer-link">Privacy Policy</a></li>
+              <li><a href="#" class="footer-link">Terms of Service</a></li>
+              <li><a href="#" class="footer-link">Cookie Policy</a></li>
+              <li><a href="#" class="footer-link">Careers</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Divider -->
+      <hr class="footer-divider">
+      
+      <!-- Copyright Row -->
+      <div class="footer-bottom">
+        <div class="row align-items-center">
+          <div class="col-md-6 text-center text-md-start">
+            <p class="copyright-text">&copy; <span id="current-year">2023</span> The Taste Tale. All rights reserved.</p>
+          </div>
+          <div class="col-md-6 text-center text-md-end">
+            <p class="design-credit">Designed with <i class="fas fa-heart heart-icon"></i> by The Taste Tale Team</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Back to top button
+    const backToTopButton = document.querySelector('.back-to-top');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 300) {
+        backToTopButton.classList.add('active');
+      } else {
+        backToTopButton.classList.remove('active');
+      }
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Initialize tooltips
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.map(function(tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+
+    // Update copyright year automatically
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

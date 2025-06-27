@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Experience authentic Indian cuisine at The Taste Tale - Award-winning restaurant with modern ambiance">
+    <meta name="keywords" content="Indian restaurant, fine dining, food delivery, catering, best restaurant near me">
+    <meta name="author" content="The Taste Tale">
+    <meta property="og:title" content="The Taste Tale | Authentic Indian Cuisine">
+    <meta property="og:description" content="Discover our exquisite menu featuring traditional Indian dishes with modern presentation">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1552566626-52f8b828add9">
+    <meta property="og:url" content="https://www.thetastetale.com/menu">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>Menu | The Taste Tale | Authentic Indian Fine Dining</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Add AOS CSS for animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #d4af37;
+            --primary-dark: #b8972e;
+            --secondary: #2c3e50;
+            --accent: #e74c3c;
+            --light: #f9f9f9;
+            --dark: #222;
+            --text: #333;
+            --text-light: #777;
+            --success: #27ae60;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, .display-font {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1552566626-52f8b828add9') no-repeat center/cover;
+            height: 80vh;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, var(--light), transparent);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            text-align: center;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+        }
+
+        .section-bg-light {
+            background-color: var(--light);
+        }
+
+        .section-bg-dark {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .section-bg-pattern {
+            background-color: var(--light);
+            background-image: url('https://www.transparenttextures.com/patterns/concrete-wall.png');
+        }
+
+        .menu-card {
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            height: 100%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            background: white;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-card-img {
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            width: 100%;
+        }
+
+        .menu-card:hover .menu-card-img {
+            transform: scale(1.05);
+        }
+
+        .menu-card-body {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            height: calc(100% - 250px);
+        }
+
+        .menu-card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .menu-card-text {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .menu-card-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .badge {
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+        }
+
+        .badge-new {
+            background: var(--accent);
+            color: white;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 2;
+        }
+
+        .badge-popular {
+            background: var(--primary);
+            color: var(--secondary);
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 2;
+        }
+
+        .badge-veg {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--success);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            z-index: 2;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            border: none;
+            color: var(--secondary);
+            padding: 0.7rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+            color: var(--secondary);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            padding: 0.7rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .filter-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            background: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--primary);
+            padding: 0.7rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary);
+            color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
+        }
+
+        .cta-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4') no-repeat center/cover;
+            padding: 8rem 0;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-title {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-text {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            opacity: 0.9;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 5rem 0 2rem;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            color: white;
+        }
+
+        .footer-logo span {
+            color: var(--primary);
+        }
+
+        .footer-about {
+            margin-bottom: 2rem;
+        }
+
+        .footer-links h5 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 1.5rem;
+        }
+
+        .social-icons a {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: var(--primary);
+            color: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        /* Floating cart button */
+        .floating-cart {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: var(--accent);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            z-index: 998;
+            transition: all 0.3s ease;
+        }
+
+        .floating-cart:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.3);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--secondary);
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Loading animation */
+        .loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--secondary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+
+        .loader-logo {
+            color: white;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-top: 20px;
+        }
+
+        .loader-logo span {
+            color: var(--primary);
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .cta-title {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                height: 70vh;
+            }
+            
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section {
+                padding: 4rem 0;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .cta-section {
+                padding: 5rem 0;
+            }
+            
+            .cta-title {
+                font-size: 2.2rem;
+            }
+            
+            .cta-text {
+                font-size: 1.1rem;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .filter-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .filter-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Animation classes */
+        .animate-delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .animate-delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .animate-delay-3 {
+            animation-delay: 0.6s;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Loading Screen -->
+    <div class="loader-wrapper">
+        <div class="loader"></div>
+        <div class="loader-logo">The Taste <span>Tale</span></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title animate__animated animate__fadeInDown">Our Culinary Masterpieces</h1>
+            <p class="hero-subtitle animate__animated animate__fadeIn animate__delay-1s">Discover the art of Indian cuisine through our carefully crafted menu</p>
+            <a href="#menu" class="btn btn-primary animate__animated animate__fadeInUp animate__delay-2s">Explore Menu</a>
+        </div>
+    </section>
+
+    <!-- Menu Filter -->
+    <section class="section section-bg-light">
+        <div class="container">
+            <div class="filter-nav">
+                <button class="filter-btn active" data-filter="all">All Items</button>
+                <button class="filter-btn" data-filter="veg">Vegetarian</button>
+                <button class="filter-btn" data-filter="non-veg">Non-Veg</button>
+                <button class="filter-btn" data-filter="starter">Starters</button>
+                <button class="filter-btn" data-filter="main">Mains</button>
+                <button class="filter-btn" data-filter="dessert">Desserts</button>
+                <button class="filter-btn" data-filter="chef">Chef's Special</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Starters Section -->
+    <section class="section section-bg-pattern" id="menu">
+        <div class="container">
+            <h2 class="section-title">Appetizers</h2>
+            <div class="row g-4">
+
+                <div class="col-12 col-md-6 col-lg-4" data-category="starter veg chef">
+                    <div class="menu-card" data-aos="fade-up">
+                        <span class="badge-new">New</span>
+                        <span class="badge-veg"><i class="fas fa-leaf"></i></span>
+                        <img src="https://media.istockphoto.com/id/502663991/photo/punjabi-samosa-23.webp?a=1&b=1&s=612x612&w=0&k=20&c=2UGubzXP-9KWDM_LsRzaJcE2_rjotSNBOs6vgtk6r84=" class="menu-card-img" alt="Crispy Samosa">
+                        <div class="menu-card-body">
+                            <h5 class="menu-card-title">Crispy Samosa</h5>
+                            <p class="menu-card-text">Golden fried pastry filled with spiced potatoes and peas, served with mint and tamarind chutneys.</p>
+                            <div class="menu-card-price">$5.99</div>
+                            <button class="btn btn-primary add-to-cart" data-item="Crispy Samosa" data-price="5.99">Add to Order</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4" data-category="starter veg">
+                    <div class="menu-card" data-aos="fade-up" data-aos-delay="100">
+                        <span class="badge-veg"><i class="fas fa-leaf"></i></span>
+                        <img src="https://media.istockphoto.com/id/1186759790/photo/paneer-tikka-at-skewers-in-black-bowl-at-dark-slate-background-paneer-tikka-is-an-indian.jpg?s=612x612&w=0&k=20&c=cITToqM1KEnrixXjoLhEciqP24SxdKtW3QXykq-W5OE=" class="menu-card-img" alt="Paneer Tikka">
+                        <div class="menu-card-body">
+                            <h5 class="menu-card-title">Paneer Tikka</h5>
+                            <p class="menu-card-text">Marinated cottage cheese grilled to perfection with bell peppers and onions.</p>
+                            <div class="menu-card-price">$7.99</div>
+                            <button class="btn btn-primary add-to-cart" data-item="Paneer Tikka" data-price="7.99">Add to Order</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4" data-category="starter non-veg chef">
+                    <div class="menu-card" data-aos="fade-up" data-aos-delay="200">
+                        <span class="badge-popular">Popular</span>
+                        <img src="https://media.istockphoto.com/id/95487821/photo/tandoori-chicken-leg.jpg?s=612x612&w=0&k=20&c=QUsOqUrJnVlDZOPdB-kbqBk-1RraOygGNkYPzKsiSM8=" class="menu-card-img" alt="Tandoori Chicken">
+                        <div class="menu-card-body">
+                            <h5 class="menu-card-title">Tandoori Chicken</h5>
+                            <p class="menu-card-text">Smoky, tender chicken marinated in yogurt and spices, grilled to perfection in a traditional tandoor.</p>
+                            <div class="menu-card-price">$9.99</div>
+                            <button class="btn btn-primary add-to-cart" data-item="Tandoori Chicken" data-price="9.99">Add to Order</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Course Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Main Course</h2>
+            <div class="row g-4">
+
+                <div class="col-12 col-md-6 col-lg-4" data-category="main veg">
+                    <div class="menu-card" data-aos="fade-up">
+                        <span class="badge-veg"><i class="fas fa-leaf"></i></span>
+                        <img src="https://media.istockphoto.com/id/882268362/photo/paneer-butter-masala-butter-paneer.jpg?s=612x612&w=0&k=20&c=xZRBUAFgEvPhdHhz68BHj1aXz-l1d_5VgBuMnTRUD_c=" class="menu-card-img" alt="Paneer Butter Masala">
+                        <div class="menu-card-body">
+                            <h5 class="menu-card-title">Paneer Butter Masala</h5>
+                            <p class="menu-card-text">Soft cubes of cottage cheese cooked in a rich, creamy tomato gravy with aromatic spices.</p>
+                            <div class="menu-card-price">$12.99</div>
+                            <button class="btn btn-primary add-to-cart" data-item="Paneer Butter Masala" data-price="12.99">Add to Order</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4" data-category="main non-veg chef">
+                    <div class="menu-card" data-aos="fade-up" data-aos-delay="100">
+                        <span class="badge-popular">Best Seller</span>
+                        <img src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398" class="menu-card-img" alt="Butter Chicken">
+                        <div class="menu-card-body">
+                            <h5 class="menu-card-title">Butter Chicken</h5>
+                            <p class="menu-card-text">Tender chicken pieces in a rich, creamy tomato gravy with aromatic spices.</p>
+                            <div class="menu-card-price">$14.99</div>
+                            <button class="btn btn-primary add-to-cart" data-item="Butter Chicken" data-price="14.99">Add to Order</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4" data-category="main veg">
+                    <div class="menu-card" data-aos="fade-up" data-aos-delay="200">
+                        <span class="badge-veg"><i class="fas fa-leaf"></i></span>
+                        <img src="https://media.istockphoto.com/id/1170374719/photo/dal-makhani-at-dark-background.jpg?s=612x612&w=0&k=20&c=49yLaUAE2apakVk2AAiRQimZd98WtSjIQ0hzCzWsmns=" class="menu-card-img" alt="Dal Makhani">
+                        <div class="menu-card-body">
+                            <h5 class="menu-card-title">Dal Makhani</h5>
+                            <p class="menu-card-text">Creamy black lentils slow-cooked with butter and spices, a rich and comforting dish.</p>
+                            <div class="menu-card-price">$10.99</div>
+                            <button class="btn btn-primary add-to-cart" data-item="Dal Makhani" data-price="10.99">Add to Order</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4" data-category="main non-veg">
+                    <div class="menu-card" data-aos="fade-up">
+                        <img src="https://media.istockphoto.com/id/1345624336/photo/chicken-biriyani.jpg?s=612x612&w=0&k=20&c=adU_N0P-1SKMQLZu5yu7aPknfLLgbViI8XILqLP92A4=" class="menu-card-img" alt="Chicken Biryani">
+                        <div class="menu-card-body">
+                            <h5 class="menu-card-title">Chicken Biryani</h5>
+                            <p class="menu-card-text">Fragrant basmati rice cooked with tender chicken and aromatic spices, layered and dum cooked.</p>
+                            <div class="menu-card-price">$13.99</div>
+                            <button class="btn btn-primary add-to-cart" data-item="Chicken Biryani" data-price="13.99">Add to Order</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4" data-category="main veg">
+                    <div class="menu-card" data-aos="fade-up" data-aos-delay="100">
+                        <span class="badge-veg"><i class="fas fa-leaf"></i></span>
+                        <img src="https://media.istockphoto.com/id/1146291429/photo/palak-paneer-or-spinach-and-cottage-cheese-curry-on-a-dark-background-traditional-indian-food.jpg?s=612x612&w=0&k=20&c=LuY5cNs9p9EonSEqRE8t7xgvCPjLfT2iPYhsg5ZRNkw=" class="menu-card-img" alt="Palak Paneer">
+                        <div class="menu-card-body">
+                            <h5 class="menu-card-title">Palak Paneer</h5>
+                            <p class="menu-card-text">Fresh spinach cooked with Indian cottage cheese in a mildly spiced gravy.</p>
+                            <div class="menu-card-price">$11.99</div>
+                            <button class="btn btn-primary add-to-cart" data-item="Palak Paneer" data-price="11.99">Add to Order</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4" data-category="main non-veg">
+                    <div class="menu-card" data-aos="fade-up" data-aos-delay="200">
+                        <img src="https://media.istockphoto.com/id/2207609916/photo/image-of-lamb-dum-style-in-masala-rogan-gravy-rich-indian-cuisine-served-in-gold-dish.jpg?s=612x612&w=0&k=20&c=DDCBe_89zOhPOhzG4-7SkU8WByT8MKL3FPZRrh35Kt0=" class="menu-card-img" alt="Lamb Rogan Josh">
+                        <div class="menu-card-body">
+                            <h5 class="menu-card-title">Lamb Rogan Josh</h5>
+                            <p class="menu-card-text">Tender lamb cooked in a rich, aromatic gravy with traditional Kashmiri spices.</p>
+                            <div class="menu-card-price">$16.99</div>
+                            <button class="btn btn-primary add-to-cart" data-item="Lamb Rogan Josh" data-price="16.99">Add to Order</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Desserts Section -->
+    <section class="section section-bg-pattern">
+        <div class="container">
+            <h2 class="section-title">Sweet Endings</h2>
+            <div class="row g-4">
+
+                <div class="col-12 col-md-6 col-lg-4" data-category="dessert veg">
+                    <div class="menu-card" data-aos="fade-up">
+                        <span class="badge-veg"><i class="fas fa-leaf"></i></span>
+                        <img src="https://media.istockphoto.com/id/521788423/photo/gulab-jamun.jpg?s=612x612&w=0&k=20&c=oMoXZUYPBZq_N8h9yqB16HsmGF4G-oEcRwEg-K8zZ0o=" class="menu-card-img" alt="Gulab Jamun">
+                        <div class="menu-card-body">
+                            <h5 class="menu-card-title">Gulab Jamun</h5>
+                            <p class="menu-card-text">Warm, deep-fried milk-solid balls soaked in fragrant sugar syrup, a perfect end to any meal.</p>
+                            <div class="menu-card-price">$5.99</div>
+                            <button class="btn btn-primary add-to-cart" data-item="Gulab Jamun" data-price="5.99">Add to Order</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4" data-category="dessert veg chef">
+                    <div class="menu-card" data-aos="fade-up" data-aos-delay="100">
+                        <span class="badge-new">Seasonal</span>
+                        <span class="badge-veg"><i class="fas fa-leaf"></i></span>
+                        <img src="https://media.istockphoto.com/id/692446072/photo/most-famous-indian-sweet-pudding-kheer-or-semiya-khir-in-a-bowl-selective-focus.jpg?s=612x612&w=0&k=20&c=EYeuMLOgqpcFRtrDJ8KPGdxPjlUOrBhUwgjzU0Jwt5k=" class="menu-card-img" alt="Kheer">
+                        <div class="menu-card-body">
+                            <h5 class="menu-card-title">Kheer</h5>
+                            <p class="menu-card-text">A traditional rice pudding made with milk, sugar, cardamom, and saffron, garnished with nuts.</p>
+                            <div class="menu-card-price">$6.49</div>
+                            <button class="btn btn-primary add-to-cart" data-item="Kheer" data-price="6.49">Add to Order</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4" data-category="dessert veg">
+                    <div class="menu-card" data-aos="fade-up" data-aos-delay="200">
+                        <span class="badge-veg"><i class="fas fa-leaf"></i></span>
+                        <img src="https://media.istockphoto.com/id/1441840881/photo/appetizing-traditional-ras-malai-indian-sweet-dish-soft-paneer-balls-immersed-in-creamy-milk.jpg?s=612x612&w=0&k=20&c=9Z7seuhg0eEjvUq8ykjIftkfydKsNLsLq-smHBvZwMg=" class="menu-card-img" alt="Rasmalai">
+                        <div class="menu-card-body">
+                            <h5 class="menu-card-title">Rasmalai</h5>
+                            <p class="menu-card-text">Soft cottage cheese dumplings in sweetened, thickened milk delicately flavored with cardamom.</p>
+                            <div class="menu-card-price">$6.99</div>
+                            <button class="btn btn-primary add-to-cart" data-item="Rasmalai" data-price="6.99">Add to Order</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2 class="cta-title">Ready to Experience Authentic Indian Cuisine?</h2>
+            <p class="cta-text">Book your table today and embark on a culinary journey through the diverse flavors of India</p>
+            <div class="btn-group">
+                <a href="Restraunt.html" class="btn btn-primary">Reserve a Table</a>
+                <a href="tel:+1234567890" class="btn btn-outline">Call Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <a href="#" class="footer-logo">The Taste <span>Tale</span></a>
+                    <div class="footer-about">
+                        <p>Bringing authentic Indian flavors to your table since 2010. Our passion for traditional recipes and modern presentation creates unforgettable dining experiences.</p>
+                    </div>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-yelp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-5 mb-md-0">
+                    <div class="footer-links">
+                        <h5>Menu</h5>
+                        <ul>
+                            <li><a href="#">Starters</a></li>
+                            <li><a href="#">Main Course</a></li>
+                            <li><a href="#">Desserts</a></li>
+                            <li><a href="#">Drinks</a></li>
+                            <li><a href="#">Chef's Special</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-5 mb-md-0">
+                    <div class="footer-links">
+                        <h5>Information</h5>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Our Chefs</a></li>
+                            <li><a href="#">Events</a></li>
+                            <li><a href="#">Gallery</a></li>
+                            <li><a href="#">Careers</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-links">
+                        <h5>Contact Us</h5>
+                        <ul>
+                            <li><i class="fas fa-map-marker-alt me-2"></i> 123 Spice Street, Foodie City, FC 12345</li>
+                            <li><i class="fas fa-phone me-2"></i> (123) 456-7890</li>
+                            <li><i class="fas fa-envelope me-2"></i> info@thetastetale.com</li>
+                            <li><i class="fas fa-clock me-2"></i> Mon-Fri: 11am - 10pm<br>Sat-Sun: 10am - 11pm</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 The Taste Tale. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Floating Cart Button -->
+    <div class="floating-cart">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count">0</span>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Your Order</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="cart-items">
+                        <!-- Cart items will be dynamically inserted here -->
+                    </div>
+                    <div class="cart-total text-end mt-3">
+                        <h5>Total: <span class="total-amount">$0.00</span></h5>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continue Browsing</button>
+                    <button type="button" class="btn btn-primary">Proceed to Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Add AOS JS for animations -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Custom Script -->
+    <script>
+        // Initialize AOS animation library
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // Loading screen
+        $(window).on('load', function() {
+            $('.loader-wrapper').fadeOut('slow');
+        });
+
+        // Back to top button
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 300) {
+                $('.back-to-top').addClass('active');
+            } else {
+                $('.back-to-top').removeClass('active');
+            }
+        });
+
+        $('.back-to-top').click(function() {
+            $('html, body').animate({scrollTop: 0}, 'slow');
+            return false;
+        });
+
+        // Menu filtering
+        $('.filter-btn').click(function() {
+            $('.filter-btn').removeClass('active');
+            $(this).addClass('active');
+            
+            const filter = $(this).data('filter');
+            if (filter === 'all') {
+                $('[data-category]').show();
+            } else {
+                $('[data-category]').each(function() {
+                    if ($(this).data('category').includes(filter)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            }
+        });
+
+        // Shopping cart functionality
+        let cart = [];
+        let cartCount = 0;
+        let cartTotal = 0;
+
+        $('.add-to-cart').click(function() {
+            const item = $(this).data('item');
+            const price = parseFloat($(this).data('price'));
+            
+            // Add item to cart
+            cart.push({item, price});
+            cartCount++;
+            cartTotal += price;
+            
+            // Update cart UI
+            $('.cart-count').text(cartCount);
+            
+            // Show notification
+            const toast = $(`
+                <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+                    <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="toast-header">
+                            <strong class="me-auto">Added to Cart</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                        <div class="toast-body">
+                            ${item} added to your order
+                        </div>
+                    </div>
+                </div>
+            `);
+            
+            $('body').append(toast);
+            setTimeout(() => toast.remove(), 3000);
+        });
+
+        // Open cart modal
+        $('.floating-cart').click(function() {
+            const modal = $('#cartModal');
+            const cartItems = modal.find('.cart-items');
+            
+            // Clear previous items
+            cartItems.empty();
+            
+            // Add current items
+            if (cart.length === 0) {
+                cartItems.append('<p>Your cart is empty</p>');
+            } else {
+                cart.forEach(item => {
+                    cartItems.append(`
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>${item.item}</span>
+                            <span>$${item.price.toFixed(2)}</span>
+                        </div>
+                    `);
+                });
+            }
+            
+            // Update total
+            modal.find('.total-amount').text('$' + cartTotal.toFixed(2));
+            
+            // Show modal
+            new bootstrap.Modal(modal).show();
+        });
+
+        // Close toast when close button is clicked
+        $(document).on('click', '.btn-close', function() {
+            $(this).closest('.toast').remove();
+        });
+    </script>
+</body>
+</html>

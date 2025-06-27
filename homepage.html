@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LuxeStay - Luxury Hotel Accommodations</title>
+  <meta name="description" content="Experience unparalleled luxury at LuxeStay. Book your stay in our premium rooms and suites with world-class amenities.">
+    <link rel="icon" href="lsl.png"> 
+  
+  <!-- Bootstrap & Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+  
+  <!-- Icons & Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Add Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  
+  <style>
+  /* Improved Map Section Styles */
+  .map-container {
+    height: 100%;
+    min-height: 400px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .contact-info-box {
+    background: white;
+    border-radius: 12px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .contact-icon {
+    width: 60px;
+    height: 60px;
+    background: #0077b6;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+  }
+
+  .icon-wrapper {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Ensure equal height for cards */
+  @media (min-width: 768px) {
+    .row.align-items-stretch > [class*='col-'] {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+</style>
+  <style>
+ 
+    :root {
+      --primary-color: #0077b6;
+      --secondary-color: #48cae4;
+      --accent-color: #ff9e00;
+      --dark-color: #001f3f;
+      --light-color: #f8f9fa;
+      --text-color: #333333;
+      --text-light: #6c757d;
+    }
+    
+    html { 
+      scroll-behavior: smooth; 
+    }
+    
+    body { 
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-color);
+      line-height: 1.6;
+      padding-top: 80px;
+      background-color: #ffffff;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+    }
+    
+    .heading {
+      text-align: center;
+      font-size: 2.8rem;
+      color: var(--primary-color);
+      margin: 3rem 0;
+      position: relative;
+      padding-bottom: 1rem;
+    }
+    
+    .heading:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: var(--accent-color);
+      border-radius: 2px;
+    }
+    
+    .hero-img {
+      height: 600px;
+      object-fit: cover;
+    }
+    
+    .navbar {
+      transition: all 0.3s ease;
+      padding: 15px 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .navbar.scrolled {
+      padding: 10px 0;
+      background-color: rgba(255,255,255,0.98) !important;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .navbar-brand {
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--dark-color) !important;
+    }
+    
+    .nav-link {
+      font-weight: 500;
+      color: var(--dark-color) !important;
+      position: relative;
+      margin: 0 8px;
+    }
+    
+    .nav-link:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-color);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover:after {
+      width: 100%;
+    }
+    
+    .btn-primary {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+      padding: 10px 25px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+      background-color: #005f92;
+      border-color: #005f92;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .btn-accent {
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-accent:hover {
+      background-color: #e68a00;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .room-card {
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      background: #fff;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .room-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+    
+    .room-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+    
+    .room-card h3 {
+      color: var(--dark-color);
+      margin-bottom: 10px;
+      font-size: 1.4rem;
+    }
+    
+    .room-card p {
+      color: var(--text-light);
+      margin-bottom: 15px;
+    }
+    
+    .modal-img-horizontal {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+    
+    .modal-img-horizontal:hover {
+      transform: scale(1.02);
+    }
+    
+    .slider-img {
+      height: 350px;
+      object-fit: cover;
+      border-radius: 12px;
+      transition: all 0.4s ease;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .slider-img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    
+    .service-card {
+      padding: 30px 20px;
+      border-radius: 12px;
+      text-align: center;
+      background: #fff;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      height: 100%;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    
+    .service-card i {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+    }
+    
+    .service-card h5 {
+      color: var(--dark-color);
+      margin-bottom: 15px;
+    }
+    
+    .service-card p {
+      color: var(--text-light);
+    }
+    
+    footer {
+      background-color: var(--dark-color);
+      color: white;
+      padding: 60px 0 20px;
+    }
+    
+    footer h5 {
+      color: var(--accent-color);
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+    
+    footer a {
+      color: #adb5bd;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    footer a:hover {
+      color: white;
+      text-decoration: none;
+    }
+    
+    .accordion-button:not(.collapsed) {
+      background-color: rgba(255,255,255,0.05);
+      color: white;
+    }
+    
+    .accordion-button {
+      background-color: rgba(255,255,255,0.05);
+      color: white;
+    }
+    
+    .accordion-button:focus {
+      box-shadow: none;
+      border-color: rgba(255,255,255,0.1);
+    }
+    
+    .accordion-body {
+      background-color: rgba(255,255,255,0.02);
+    }
+    
+    .carousel-caption {
+      background: rgba(0,0,0,0.5);
+      padding: 20px;
+      border-radius: 10px;
+      bottom: 30%;
+    }
+    
+    .carousel-control-prev, .carousel-control-next {
+      width: 5%;
+    }
+    
+    @media (max-width: 768px) {
+      .heading {
+        font-size: 2rem;
+      }
+      
+      .hero-img {
+        height: 400px;
+      }
+      
+      .slider-img {
+        height: 250px;
+      }
+      
+      .carousel-caption {
+        bottom: 20%;
+        padding: 15px;
+      }
+      
+      .carousel-caption h5 {
+        font-size: 1.5rem;
+      }
+      
+      .navbar {
+        padding: 10px 0;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .heading {
+        font-size: 1.8rem;
+      }
+      
+      .hero-img {
+        height: 300px;
+      }
+      
+      .carousel-caption {
+        bottom: 10%;
+      }
+      
+      .carousel-caption h5 {
+        font-size: 1.2rem;
+      }
+      
+      .carousel-caption .btn {
+        padding: 5px 15px;
+        font-size: 0.9rem;
+      }
+    }
+    
+    /* Animation classes */
+    .fade-in {
+      animation: fadeIn 1s ease-in;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .delay-1 {
+      animation-delay: 0.2s;
+    }
+    
+    .delay-2 {
+      animation-delay: 0.4s;
+    }
+    
+    .delay-3 {
+      animation-delay: 0.6s;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="lsl.png" alt="LuxeStay Logo" width="40" height="40" class="me-2">
+        <span style="font-family: 'Playfair Display', serif;">LuxeStay</span>
+      </a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav align-items-center me-3">
+          <li class="nav-item"><a class="nav-link px-3" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link px-3" href="#room">Rooms</a></li>
+          <li class="nav-item"><a class="nav-link px-3" href="Restraunt.html">Restaurant</a></li>
+          <li class="nav-item"><a class="nav-link px-3" href="#about">About Us</a></li>
+          <li class="nav-item"><a class="nav-link px-3" href="#gallery">Gallery</a></li> <!-- Changed from #slider-gallery to #gallery -->
+          <li class="nav-item"><a class="nav-link px-3" href="BookingListServlet">Room Report</a></li>
+        </ul>
+        
+        <a href="booking.html" class="btn btn-accent rounded-pill">
+          Book Now <i class="fas fa-arrow-right ms-2"></i>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Rest of your HTML remains exactly the same -->
+  <!-- Hero Carousel -->
+  <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="home-slide1.jpg" class="d-block w-100 hero-img" alt="LuxeStay Hotel">
+        <div class="carousel-caption d-none d-md-block">
+          <h2 class="display-4">The Grandness Lies Here</h2>
+          <a href="#room" class="btn btn-light btn-lg mt-3">Explore Rooms</a>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="home-slide2.jpg" class="d-block w-100 hero-img" alt="LuxeStay Luxury">
+        <div class="carousel-caption d-none d-md-block">
+          <h2 class="display-4">Where Dreams Come True</h2>
+          <a href="#room" class="btn btn-light btn-lg mt-3">Explore Rooms</a>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+
+  <!-- About Section -->
+  <section id="about" class="container py-5 my-5">
+    <h2 class="heading fade-in">About Us</h2>
+    <div class="row align-items-center gx-5 gy-4">
+      <div class="col-lg-6 fade-in">
+        <img src="abouthome.jpg" class="img-fluid rounded shadow-lg w-100" alt="About LuxeStay">
+      </div>
+      <div class="col-lg-6 fade-in delay-1">
+        <p class="lead">Welcome to LuxeStay, where luxury and comfort intertwine for an unforgettable experience.</p>
+        <p>With a rich heritage of hospitality, we deliver excellence in every aspect of your stay. Our elegant rooms provide relaxation with modern amenities and plush furnishings, designed to meet the needs of discerning travelers.</p>
+        <p>Indulge in our diverse culinary offerings, from fine dining to casual options, all prepared by our world-class chefs. Our stylish bars offer expertly crafted cocktails and stunning city views, perfect for unwinding after a day of exploration.</p>
+        <p>Rejuvenate in our top-notch wellness facilities, including a temperature-controlled pool, luxurious spa treatments, and a state-of-the-art fitness center. At LuxeStay, every detail is carefully considered to exceed your expectations and create lifelong memories.</p>
+        <a href="about.html" class="btn btn-primary mt-3">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Room Section -->
+  <section id="room" class="container-fluid py-5 bg-light">
+    <div class="container">
+      <h2 class="heading fade-in">Our Rooms</h2>
+      <p class="text-center mb-5 fade-in delay-1">Experience unparalleled comfort in our carefully designed accommodations</p>
+      
+      <div class="swiper roomSwiper fade-in delay-2">
+        <div class="swiper-wrapper">
+          <!-- Room 1 -->
+          <div class="swiper-slide">
+            <div class="room-card">
+              <a href="#" data-bs-toggle="modal" data-bs-target="#modalRoom1">
+                <img src="https://media.istockphoto.com/id/1087513330/photo/luxury-presidential-suite-with-a-bedroom-and-a-large-bed-and-a-living-room-with-a-sofa-and-a.jpg?s=612x612&w=0&k=20&c=-JSFMhq7mV6dm5fD8M0IjloKsN8FS4BZfzO2g7Zbk3M=" alt="Presidential Suite">
+              </a>
+              <h3>Presidential Suite</h3>
+              <p>₹7000/night - Ultimate luxury and grandeur with city views</p>
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <a href="booking.html" class="btn btn-primary w-100">Book Now</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Room 2 -->
+          <div class="swiper-slide">
+            <div class="room-card">
+              <a href="#" data-bs-toggle="modal" data-bs-target="#modalRoom2">
+                <img src="https://media.istockphoto.com/id/1036068800/photo/eco-cotton-linen-and-blanket-on-a-bed-in-nature-loving-family-guesthouse-for-spring-and.jpg?s=612x612&w=0&k=20&c=5gYu66MEXxYz6vnbWimFvaEX-tGZ6lZEJJHjiRElIOU=" alt="Family Room">
+              </a>
+              <h3>Family Room</h3>
+              <p>₹4000/night - Spacious comfort for the whole family</p>
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <a href="booking.html" class="btn btn-primary w-100">Book Now</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Room 3 -->
+          <div class="swiper-slide">
+            <div class="room-card">
+              <a href="#" data-bs-toggle="modal" data-bs-target="#modalRoom3">
+                <img src="https://media.istockphoto.com/id/1213695547/photo/3d-rendering-of-an-elegant-bedroom.jpg?s=612x612&w=0&k=20&c=yxOoaz2IAd9zvtlXeS-Th-AiXhaCtMIxOONfGbtGeG8=" alt="Standard Room">
+              </a>
+              <h3>Standard Room</h3>
+              <p>₹1000/night - Essential amenities at great value</p>
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <a href="booking.html" class="btn btn-primary w-100">Book Now</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Room 4 -->
+          <div class="swiper-slide">
+            <div class="room-card">
+              <a href="#" data-bs-toggle="modal" data-bs-target="#modalRoom4">
+                <img src="room-4.jpg" alt="Deluxe Room">
+              </a>
+              <h3>Deluxe Room</h3>
+              <p>₹2500/night - Spacious and elegant with premium amenities</p>
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <a href="booking.html" class="btn btn-primary w-100">Book Now</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Room 5 -->
+          <div class="swiper-slide">
+            <div class="room-card">
+              <a href="#" data-bs-toggle="modal" data-bs-target="#modalRoom5">
+                <img src="room-5.jpg" alt="Suite">
+              </a>
+              <h3>Suite</h3>
+              <p>₹2000/night - Stylish and private with separate living area</p>
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <a href="booking.html" class="btn btn-primary w-100">Book Now</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Room 6 -->
+          <div class="swiper-slide">
+            <div class="room-card">
+              <a href="#" data-bs-toggle="modal" data-bs-target="#modalRoom6">
+                <img src="room-6.jpg" alt="Executive Room">
+              </a>
+              <h3>Executive Room</h3>
+              <p>₹2000/night - Premium accommodations for travelers</p>
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <a href="booking.html" class="btn btn-primary w-100">Book Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Room Modals -->
+  <!-- Modal Room 1 -->
+  <div class="modal fade" id="modalRoom1" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Presidential Suite</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <img src="https://media.istockphoto.com/id/104247526/photo/presidential-suite.jpg?s=612x612&w=0&k=20&c=0YQZ5ykr1dT_qXwQ3TyNFJz0N4E2f-gKDHY7S4rzG4w=" class="modal-img-horizontal" alt="Presidential Suite">
+            </div>
+            <div class="col-md-6">
+              <img src="https://img.freepik.com/premium-photo/minsk-belarus-july-2016-full-spherical-360-by-180-degrees-seamless-hdri-panorama-interior-hall-bedroom-modern-hotel-equirectangular-equidistant-projection-ar-vr-content_97694-736.jpg" class="modal-img-horizontal" alt="Presidential Suite">
+            </div>
+            <div class="col-md-6">
+              <img src="https://img.freepik.com/free-photo/restaurant-hall-with-leather-armchairs-french-windows_140725-8445.jpg" class="modal-img-horizontal" alt="Presidential Suite">
+            </div>
+            <div class="col-md-6">
+              <img src="https://img.freepik.com/free-photo/3d-rendering-luxury-bedroom-suite-resort-hotel-with-twin-bed-living_105762-2018.jpg" class="modal-img-horizontal" alt="Presidential Suite">
+            </div>
+          </div>
+          <div class="mt-4">
+            <h5>Room Features</h5>
+            <ul class="list-unstyled">
+              <li><i class="fas fa-check text-success me-2"></i> 1200 sq ft of luxurious space</li>
+              <li><i class="fas fa-check text-success me-2"></i> King-size bed with premium linens</li>
+              <li><i class="fas fa-check text-success me-2"></i> Separate living and dining areas</li>
+              <li><i class="fas fa-check text-success me-2"></i> Panoramic city views</li>
+              <li><i class="fas fa-check text-success me-2"></i> Marble bathroom with soaking tub</li>
+            </ul>
+            <a href="booking.html" class="btn btn-primary w-100 mt-3">Book This Room</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Other Room Modals would follow the same pattern -->
+  <!-- Modal Room 2 -->
+  <div class="modal fade" id="modalRoom2" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Family Room</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <img src="https://media.istockphoto.com/id/1036068800/photo/eco-cotton-linen-and-blanket-on-a-bed-in-nature-loving-family-guesthouse-for-spring-and.jpg?s=612x612&w=0&k=20&c=5gYu66MEXxYz6vnbWimFvaEX-tGZ6lZEJJHjiRElIOU=" class="modal-img-horizontal" alt="Family Room">
+            </div>
+            <div class="col-md-6">
+              <img src="https://www.princehotels.com/furano/wp-content/uploads/sites/11/2019/06/Family-Room-Furano-Prince-Hotel-1.jpg" class="modal-img-horizontal" alt="Family Room">
+            </div>
+            <div class="col-md-6">
+              <img src="https://thafd.bing.com/th/id/OIP.kfKbdBapPF8Me2rNe-DTawHaE8?pid=ImgDet&w=184&h=122&c=7&dpr=1.3" class="modal-img-horizontal" alt="Family Room">
+            </div>
+            <div class="col-md-6">
+              <img src="https://pix10.agoda.net/hotelImages/109/109900/109900_17112111010059659489.jpg" class="modal-img-horizontal" alt="Family Room">
+            </div>
+          </div>
+          <div class="mt-4">
+            <h5>Room Features</h5>
+            <ul class="list-unstyled">
+              <li><i class="fas fa-check text-success me-2"></i> 800 sq ft of comfortable space</li>
+              <li><i class="fas fa-check text-success me-2"></i> Two queen beds and one twin bed</li>
+              <li><i class="fas fa-check text-success me-2"></i> Separate children's sleeping area</li>
+              <li><i class="fas fa-check text-success me-2"></i> Family-friendly amenities</li>
+              <li><i class="fas fa-check text-success me-2"></i> Spacious bathroom with tub</li>
+            </ul>
+            <a href="booking.html" class="btn btn-primary w-100 mt-3">Book This Room</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Room 3 -->
+  <div class="modal fade" id="modalRoom3" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Standard Room</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <img src="https://media.istockphoto.com/id/1213695547/photo/3d-rendering-of-an-elegant-bedroom.jpg?s=612x612&w=0&k=20&c=yxOoaz2IAd9zvtlXeS-Th-AiXhaCtMIxOONfGbtGeG8=" class="modal-img-horizontal" alt="Standard Room">
+            </div>
+            <div class="col-md-6">
+              <img src="https://amorgoshotel.com/wp-content/uploads/2014/12/Amorgos-Standard-Room1-e1464286427430.jpg" class="modal-img-horizontal" alt="Standard Room">
+            </div>
+            <div class="col-md-6">
+              <img src="https://www.thehotelguru.com/_images/4d/92/4d92aa66e5bc0de00960be26459c0a21/hotel-korsal-s1180x560.jpg" class="modal-img-horizontal" alt="Standard Room">
+            </div>
+            <div class="col-md-6">
+              <img src="https://www.hotel-vila-rova.com/img/standard-double-room-with-balcony-sea-view-1-large.jpg" class="modal-img-horizontal" alt="Standard Room">
+            </div>
+          </div>
+          <div class="mt-4">
+            <h5>Room Features</h5>
+            <ul class="list-unstyled">
+              <li><i class="fas fa-check text-success me-2"></i> 400 sq ft of comfortable space</li>
+              <li><i class="fas fa-check text-success me-2"></i> Queen-size bed with premium linens</li>
+              <li><i class="fas fa-check text-success me-2"></i> Work desk with ergonomic chair</li>
+              <li><i class="fas fa-check text-success me-2"></i> Modern bathroom with walk-in shower</li>
+              <li><i class="fas fa-check text-success me-2"></i> All standard amenities included</li>
+            </ul>
+            <a href="booking.html" class="btn btn-primary w-100 mt-3">Book This Room</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Room 4 -->
+  <div class="modal fade" id="modalRoom4" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Deluxe Room</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <img src="room-4.jpg" class="modal-img-horizontal" alt="Deluxe Room">
+            </div>
+            <div class="col-md-6">
+              <img src="https://img.freepik.com/free-photo/luxury-bedroom-interior-with-rich-furniture-scenic-view-from-walkout-deck_1258-111483.jpg" class="modal-img-horizontal" alt="Deluxe Room">
+            </div>
+            <div class="col-md-6">
+              <img src="https://img.freepik.com/free-photo/one-king-size-bed-hotel-room_114579-12159.jpg" class="modal-img-horizontal" alt="Deluxe Room">
+            </div>
+            <div class="col-md-6">
+              <img src="https://img.freepik.com/premium-photo/woman-luxury-hotel-room_102671-3496.jpg" class="modal-img-horizontal" alt="Deluxe Room">
+            </div>
+          </div>
+          <div class="mt-4">
+            <h5>Room Features</h5>
+            <ul class="list-unstyled">
+              <li><i class="fas fa-check text-success me-2"></i> 600 sq ft of elegant space</li>
+              <li><i class="fas fa-check text-success me-2"></i> King-size bed with premium linens</li>
+              <li><i class="fas fa-check text-success me-2"></i> Sitting area with comfortable chairs</li>
+              <li><i class="fas fa-check text-success me-2"></i> Upgraded bathroom amenities</li>
+              <li><i class="fas fa-check text-success me-2"></i> Enhanced views of the city</li>
+            </ul>
+            <a href="booking.html" class="btn btn-primary w-100 mt-3">Book This Room</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Room 5 -->
+  <div class="modal fade" id="modalRoom5" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Suite</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <img src="room-5.jpg" class="modal-img-horizontal" alt="Suite">
+            </div>
+            <div class="col-md-6">
+              <img src="https://img.freepik.com/free-photo/3d-rendering-beautiful-luxury-bedroom-suite-hotel-with-tv_105762-2301.jpg" class="modal-img-horizontal" alt="Suite">
+            </div>
+            <div class="col-md-6">
+              <img src="https://img.freepik.com/free-photo/3d-rendering-beautiful-comtemporary-luxury-bedroom-suite-hotel-with-tv_105762-2058.jpg" class="modal-img-horizontal" alt="Suite">
+            </div>
+            <div class="col-md-6">
+              <img src="https://img.freepik.com/premium-photo/interior-bedroom_1048944-24926197.jpg" class="modal-img-horizontal" alt="Suite">
+            </div>
+          </div>
+          <div class="mt-4">
+            <h5>Room Features</h5>
+            <ul class="list-unstyled">
+              <li><i class="fas fa-check text-success me-2"></i> 900 sq ft of stylish space</li>
+              <li><i class="fas fa-check text-success me-2"></i> Separate bedroom and living area</li>
+              <li><i class="fas fa-check text-success me-2"></i> King-size bed with premium linens</li>
+              <li><i class="fas fa-check text-success me-2"></i> Marble bathroom with walk-in shower</li>
+              <li><i class="fas fa-check text-success me-2"></i> Premium in-room amenities</li>
+            </ul>
+            <a href="booking.html" class="btn btn-primary w-100 mt-3">Book This Room</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Room 6 -->
+  <div class="modal fade" id="modalRoom6" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Executive Room</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <img src="room-6.jpg" class="modal-img-horizontal" alt="Executive Room">
+            </div>
+            <div class="col-md-6">
+              <img src="https://img.freepik.com/free-photo/luxury-hotel-reception-hall-lounge-restaurant-with-high-ceiling_105762-1771.jpg" class="modal-img-horizontal" alt="Executive Room">
+            </div>
+            <div class="col-md-6">
+              <img src="https://img.freepik.com/premium-photo/luxury-bedroom-interior-sleek-highrise-building-overlooking-glittering-city-skyline_1189966-1422.jpg" class="modal-img-horizontal" alt="Executive Room">
+            </div>
+            <div class="col-md-6">
+              <img src="https://img.freepik.com/free-photo/elegant-hotel-room-with-window_1203-1492.jpg" class="modal-img-horizontal" alt="Executive Room">
+            </div>
+          </div>
+          <div class="mt-4">
+            <h5>Room Features</h5>
+            <ul class="list-unstyled">
+              <li><i class="fas fa-check text-success me-2"></i> 500 sq ft of productive space</li>
+              <li><i class="fas fa-check text-success me-2"></i> King-size bed with premium linens</li>
+              <li><i class="fas fa-check text-success me-2"></i> Spacious work desk with ergonomic chair</li>
+              <li><i class="fas fa-check text-success me-2"></i> Enhanced lighting for work</li>
+              <li><i class="fas fa-check text-success me-2"></i> Access to executive lounge</li>
+            </ul>
+            <a href="booking.html" class="btn btn-primary w-100 mt-3">Book This Room</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Services Section -->
+  <section id="services" class="py-5 my-5">
+    <div class="container">
+      <h2 class="heading fade-in">Our Services</h2>
+      <p class="text-center mb-5 fade-in delay-1">We offer exceptional amenities to make your stay unforgettable</p>
+      
+      <div class="row g-4">
+        <div class="col-md-4 fade-in">
+          <div class="service-card">
+            <i class="fas fa-swimming-pool"></i>
+            <h5>Swimming Pool</h5>
+            <p>Relax in our temperature-controlled infinity pool with stunning views and poolside refreshments.</p>
+          </div>
+        </div>
+        
+        <div class="col-md-4 fade-in delay-1">
+          <div class="service-card">
+            <i class="fas fa-utensils"></i>
+            <h5>Gourmet Dining</h5>
+            <p>Experience world-class cuisine at our award-winning restaurants with diverse culinary offerings.</p>
+          </div>
+        </div>
+        
+        <div class="col-md-4 fade-in delay-2">
+          <div class="service-card">
+            <i class="fas fa-dumbbell"></i>
+            <h5>Fitness Center</h5>
+            <p>Stay fit with our state-of-the-art gym equipment, yoga classes, and personal training sessions.</p>
+          </div>
+        </div>
+        
+        <div class="col-md-4 fade-in">
+          <div class="service-card">
+            <i class="fas fa-spa"></i>
+            <h5>Spa & Wellness</h5>
+            <p>Rejuvenate with our signature spa treatments, sauna, steam room, and massage therapies.</p>
+          </div>
+        </div>
+        
+        <div class="col-md-4 fade-in delay-1">
+          <div class="service-card">
+            <i class="fas fa-wifi"></i>
+            <h5>High-Speed Internet</h5>
+            <p>Stay connected with our complimentary high-speed WiFi throughout the property.</p>
+          </div>
+        </div>
+        
+        <div class="col-md-4 fade-in delay-2">
+          <div class="service-card">
+            <i class="fas fa-shuttle-van"></i>
+            <h5>Concierge Services</h5>
+            <p>Our 24/7 concierge can arrange everything from airport transfers to exclusive local experiences.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+<section id="gallery" class="container-fluid py-5 bg-light">
+  <div class="container">
+    <h2 class="heading fade-in">Our Gallery</h2>
+    <p class="text-center mb-5 fade-in delay-1">Discover the beauty of our property through these moments</p>
+    
+    <!-- Gallery Navigation -->
+    <ul class="nav justify-content-center gallery-filter mb-4 fade-in delay-1">
+      <li class="nav-item">
+        <button class="nav-link active" data-filter="all">All</button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" data-filter="rooms">Rooms</button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" data-filter="dining">Dining</button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" data-filter="facilities">Facilities</button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" data-filter="events">Events</button>
+      </li>
+    </ul>
+    
+    <!-- Gallery Grid -->
+    <div class="row g-4 gallery-grid fade-in delay-2">
+      <!-- Room Images -->
+      <div class="col-lg-3 col-md-6 gallery-item" data-category="rooms">
+        <div class="gallery-card">
+          <img src="https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg" class="img-fluid w-100" alt="Luxury Suite" loading="lazy">
+          <div class="gallery-overlay">
+            <div class="gallery-caption">
+              <h5>Presidential Suite</h5>
+              <p>Experience ultimate luxury</p>
+              <a href="https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg" data-fslightbox="gallery" class="gallery-zoom">
+                <i class="fas fa-expand"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-3 col-md-6 gallery-item" data-category="rooms">
+        <div class="gallery-card">
+          <img src="https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg" class="img-fluid w-100" alt="Deluxe Room" loading="lazy">
+          <div class="gallery-overlay">
+            <div class="gallery-caption">
+              <h5>Deluxe Room</h5>
+              <p>Elegant comfort</p>
+              <a href="https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg" data-fslightbox="gallery" class="gallery-zoom">
+                <i class="fas fa-expand"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Dining Images -->
+      <div class="col-lg-3 col-md-6 gallery-item" data-category="dining">
+        <div class="gallery-card">
+          <img src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg" class="img-fluid w-100" alt="Fine Dining" loading="lazy">
+          <div class="gallery-overlay">
+            <div class="gallery-caption">
+              <h5>Fine Dining</h5>
+              <p>Gourmet experiences</p>
+              <a href="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg" data-fslightbox="gallery" class="gallery-zoom">
+                <i class="fas fa-expand"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-3 col-md-6 gallery-item" data-category="dining">
+        <div class="gallery-card">
+          <img src="https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg" class="img-fluid w-100" alt="Breakfast Buffet" loading="lazy">
+          <div class="gallery-overlay">
+            <div class="gallery-caption">
+              <h5>Breakfast Buffet</h5>
+              <p>Fresh morning selections</p>
+              <a href="https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg" data-fslightbox="gallery" class="gallery-zoom">
+                <i class="fas fa-expand"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Facilities Images -->
+      <div class="col-lg-3 col-md-6 gallery-item" data-category="facilities">
+        <div class="gallery-card">
+          <img src="https://images.pexels.com/photos/261327/pexels-photo-261327.jpeg" class="img-fluid w-100" alt="Spa Center" loading="lazy">
+          <div class="gallery-overlay">
+            <div class="gallery-caption">
+              <h5>Spa Center</h5>
+              <p>Ultimate relaxation</p>
+              <a href="https://images.pexels.com/photos/261327/pexels-photo-261327.jpeg" data-fslightbox="gallery" class="gallery-zoom">
+                <i class="fas fa-expand"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-3 col-md-6 gallery-item" data-category="facilities">
+        <div class="gallery-card">
+          <img src="https://images.pexels.com/photos/221457/pexels-photo-221457.jpeg" class="img-fluid w-100" alt="Fitness Center" loading="lazy">
+          <div class="gallery-overlay">
+            <div class="gallery-caption">
+              <h5>Fitness Center</h5>
+              <p>State-of-the-art equipment</p>
+              <a href="https://images.pexels.com/photos/221457/pexels-photo-221457.jpeg" data-fslightbox="gallery" class="gallery-zoom">
+                <i class="fas fa-expand"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Events Images -->
+      <div class="col-lg-3 col-md-6 gallery-item" data-category="events">
+        <div class="gallery-card">
+          <img src="https://images.pexels.com/photos/169523/pexels-photo-169523.jpeg" class="img-fluid w-100" alt="Wedding Event" loading="lazy">
+          <div class="gallery-overlay">
+            <div class="gallery-caption">
+              <h5>Wedding Venue</h5>
+              <p>Elegant celebrations</p>
+              <a href="https://images.pexels.com/photos/169523/pexels-photo-169523.jpeg" data-fslightbox="gallery" class="gallery-zoom">
+                <i class="fas fa-expand"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-3 col-md-6 gallery-item" data-category="events">
+        <div class="gallery-card">
+          <img src="https://images.pexels.com/photos/274131/pexels-photo-274131.jpeg" class="img-fluid w-100" alt="Conference Room" loading="lazy">
+          <div class="gallery-overlay">
+            <div class="gallery-caption">
+              <h5>Conference Facilities</h5>
+              <p>Professional settings</p>
+              <a href="https://images.pexels.com/photos/274131/pexels-photo-274131.jpeg" data-fslightbox="gallery" class="gallery-zoom">
+                <i class="fas fa-expand"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- View More Button -->
+    <div class="text-center mt-5 fade-in delay-3">
+    </div>
+  </div>
+</section>
+
+<!-- Add this to your CSS section -->
+<style>
+  /* Gallery Styles */
+  .gallery-filter {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+  
+  .gallery-filter .nav-link {
+    color: var(--text-light);
+    font-weight: 500;
+    padding: 8px 20px;
+    border-radius: 30px;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+    border: none;
+    background: transparent;
+  }
+  
+  .gallery-filter .nav-link.active,
+  .gallery-filter .nav-link:hover {
+    color: white;
+    background: var(--primary-color);
+  }
+  
+  .gallery-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    height: 300px;
+  }
+  
+  .gallery-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  .gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .gallery-caption {
+    text-align: center;
+    color: white;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+  }
+  
+  .gallery-caption h5 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+  }
+  
+  .gallery-caption p {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+  }
+  
+  .gallery-zoom {
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    background: var(--accent-color);
+    color: white;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+  
+  .gallery-zoom:hover {
+    background: white;
+    color: var(--accent-color);
+    transform: scale(1.1);
+  }
+  
+  .gallery-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  }
+  
+  .gallery-card:hover img {
+    transform: scale(1.05);
+  }
+  
+  .gallery-card:hover .gallery-overlay {
+    opacity: 1;
+  }
+  
+  .gallery-card:hover .gallery-caption {
+    transform: translateY(0);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .gallery-card {
+      height: 250px;
+    }
+    
+    .gallery-filter .nav-link {
+      padding: 6px 15px;
+      font-size: 0.9rem;
+      margin: 0 3px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .gallery-card {
+      height: 200px;
+    }
+  }
+</style>
+
+<!-- Add this to your scripts section (after other scripts) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fslightbox/3.3.1/index.min.js"></script>
+<script>
+  // Gallery filtering
+  document.addEventListener('DOMContentLoaded', function() {
+    const filterButtons = document.querySelectorAll('.gallery-filter .nav-link');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    
+    filterButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        // Update active button
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+        
+        const filterValue = this.getAttribute('data-filter');
+        
+        // Filter items
+        galleryItems.forEach(item => {
+          if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+    
+    // Initialize lightbox
+    if (typeof FsLightbox !== 'undefined') {
+      const lightbox = new FsLightbox();
+    }
+  });
+</script>
+
+  <!-- Testimonials Section -->
+  <section class="py-5 my-5 bg-primary text-white">
+    <div class="container">
+      <h2 class="heading text-white">What Our Guests Say</h2>
+      
+      <div class="row g-4">
+        <div class="col-md-4 fade-in">
+          <div class="p-4 bg-white text-dark rounded shadow h-100">
+            <div class="d-flex align-items-center mb-3">
+              <img src="https://randomuser.me/api/portraits/women/32.jpg" class="rounded-circle me-3" width="60" height="60" alt="Guest">
+              <div>
+                <h5 class="mb-0">Sarah Johnson</h5>
+                <div class="text-warning">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+              </div>
+            </div>
+            <p>"The presidential suite was absolutely breathtaking. The attention to detail and level of service was unparalleled. Will definitely return!"</p>
+          </div>
+        </div>
+        
+        <div class="col-md-4 fade-in delay-1">
+          <div class="p-4 bg-white text-dark rounded shadow h-100">
+            <div class="d-flex align-items-center mb-3">
+              <img src="https://randomuser.me/api/portraits/men/45.jpg" class="rounded-circle me-3" width="60" height="60" alt="Guest">
+              <div>
+                <h5 class="mb-0">Michael Chen</h5>
+                <div class="text-warning">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+              </div>
+            </div>
+            <p>"As a business traveler, the executive room had everything I needed. Fast WiFi, comfortable workspace, and excellent room service."</p>
+          </div>
+        </div>
+        
+        <div class="col-md-4 fade-in delay-2">
+          <div class="p-4 bg-white text-dark rounded shadow h-100">
+            <div class="d-flex align-items-center mb-3">
+              <img src="https://randomuser.me/api/portraits/women/68.jpg" class="rounded-circle me-3" width="60" height="60" alt="Guest">
+              <div>
+                <h5 class="mb-0">Emma Rodriguez</h5>
+                <div class="text-warning">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+              </div>
+            </div>
+            <p>"Our family had an amazing time. The kids loved the pool and the family room was spacious and comfortable. Highly recommended!"</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+          <h2 class="mb-4">Stay Updated</h2>
+          <p class="lead mb-4">Subscribe to our newsletter for exclusive offers and updates</p>
+          <form class="row g-2 justify-content-center">
+            <div class="col-md-8">
+              <input type="email" class="form-control form-control-lg" placeholder="Your email address">
+            </div>
+            <div class="col-md-4">
+              <button type="submit" class="btn btn-accent btn-lg w-100">Subscribe</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  <!-- Map and Contact Section -->
+<section id="contact" class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 text-center mb-5">
+      <h2 class="heading">Find Us</h2>
+      <p class="lead">Visit our luxury hotel in the heart of the city</p>
+    </div>
+  </div>
+
+  <div class="row g-4 align-items-stretch">
+    <!-- Map Column -->
+    <div class="col-lg-8">
+      <div class="h-100">
+        <div class="map-container shadow-sm" id="map">
+          <div class="alert alert-warning text-center p-4 m-0 h-100 d-flex flex-column justify-content-center">
+            <h5>Interactive Map</h5>
+            <p class="mb-3">For directions to our location:</p>
+            <a href="https://www.openstreetmap.org/?mlat=19.0760&mlon=72.8777#map=15/19.0760/72.8777" 
+               target="_blank" 
+               class="btn btn-primary mx-auto">
+              View on OpenStreetMap
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Info Column -->
+    <div class="col-lg-4">
+      <div class="contact-info-box h-100 p-4 shadow-sm">
+        <div class="text-center mb-4">
+          <div class="contact-icon mx-auto">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <h4 class="mt-3">Our Location</h4>
+          <p class="mb-0">123 Luxury Avenue<br>Downtown District<br>Mumbai, Maharashtra 400001</p>
+        </div>
+
+        <div class="text-center mb-4">
+          <div class="contact-icon mx-auto">
+            <i class="fas fa-phone-alt"></i>
+          </div>
+          <h4 class="mt-3">Contact Us</h4>
+          <p class="mb-0">Reservations: +91 22 1234 5678<br>General Inquiries: +91 22 1234 5679<br>Email: info@luxestay.com</p>
+        </div>
+
+        <div class="text-center">
+          <div class="contact-icon mx-auto">
+            <i class="fas fa-clock"></i>
+          </div>
+          <h4 class="mt-3">Front Desk Hours</h4>
+          <p class="mb-0">24/7 Reception<br>Check-in: 3:00 PM<br>Check-out: 11:00 AM</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Transportation Cards -->
+  <div class="row mt-5 g-4 justify-content-center">
+    <div class="col-md-4">
+      <div class="h-100 p-4 border rounded text-center shadow-sm">
+        <div class="icon-wrapper mb-3">
+          <i class="fas fa-car fa-3x text-primary"></i>
+        </div>
+        <h5>Parking</h5>
+        <p class="mb-0">Complimentary valet parking available for all guests. Secure underground parking with 24/7 surveillance.</p>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="h-100 p-4 border rounded text-center shadow-sm">
+        <div class="icon-wrapper mb-3">
+          <i class="fas fa-subway fa-3x text-primary"></i>
+        </div>
+        <h5>Public Transport</h5>
+        <p class="mb-0">5-minute walk to Metro Station. Multiple bus routes stop directly in front of the hotel.</p>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="h-100 p-4 border rounded text-center shadow-sm">
+        <div class="icon-wrapper mb-3">
+          <i class="fas fa-plane fa-3x text-primary"></i>
+        </div>
+        <h5>Airport Transfer</h5>
+        <p class="mb-0">We offer premium airport transfer services. Contact concierge to arrange your transportation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white pt-5 pb-3">
+    <div class="container">
+      <div class="row g-4">
+        <!-- Contact Info -->
+        <div class="col-lg-4">
+          <h5>LuxeStay</h5>
+          <p class="mt-3">123, Main Street<br>City, Country 12345</p>
+          <p><i class="fas fa-phone me-2"></i> +91 98765 43210</p>
+          <p><i class="fas fa-envelope me-2"></i> info@luxestay.com</p>
+          
+          <div class="mt-4">
+            <h6>Follow Us</h6>
+            <div class="d-flex mt-3">
+              <a href="#" class="text-white me-3"><i class="fab fa-facebook-f fa-lg"></i></a>
+              <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+              <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
+              <a href="#" class="text-white"><i class="fab fa-linkedin-in fa-lg"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Quick Links -->
+        <div class="col-lg-2 col-md-4">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled mt-3">
+            <li class="mb-2"><a href="#">Home</a></li>
+            <li class="mb-2"><a href="#room">Rooms</a></li>
+            <li class="mb-2"><a href="Restraunt.html">Restaurant</a></li>
+            <li class="mb-2"><a href="#about">About Us</a></li>
+            <li class="mb-2"><a href="#gallery">Gallery</a></li> <!-- Changed from #slider-gallery to #gallery -->
+            <li><a href="BookingListServlet">Room Report</a></li>
+          </ul>
+        </div>
+        
+        <!-- Services -->
+        <div class="col-lg-2 col-md-4">
+          <h5>Services</h5>
+          <ul class="list-unstyled mt-3">
+            <li class="mb-2"><a href="#">Spa & Wellness</a></li>
+            <li class="mb-2"><a href="#">Fitness Center</a></li>
+            <li class="mb-2"><a href="#">Swimming Pool</a></li>
+            <li class="mb-2"><a href="#">Restaurant</a></li>
+            <li class="mb-2"><a href="#">Concierge</a></li>
+            <li><a href="#">Event Spaces</a></li>
+          </ul>
+        </div>
+        
+        <!-- FAQ -->
+        <div class="col-lg-4 col-md-4">
+          <h5>Have Questions?</h5>
+          <div class="accordion mt-3" id="faqAccordion">
+            <div class="accordion-item border-0 bg-transparent">
+              <h6 class="accordion-header">
+                <button class="accordion-button collapsed bg-transparent text-white px-0" type="button" data-bs-toggle="collapse" data-bs-target="#faqOne">
+                  What are check-in/check-out times?
+                </button>
+              </h6>
+              <div id="faqOne" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body px-0 pt-0 pb-3">
+                  Check-in is at 3 PM and check-out is at 11 AM. Early check-in and late check-out may be available upon request.
+                </div>
+              </div>
+            </div>
+            
+            <div class="accordion-item border-0 bg-transparent">
+              <h6 class="accordion-header">
+                <button class="accordion-button collapsed bg-transparent text-white px-0" type="button" data-bs-toggle="collapse" data-bs-target="#faqTwo">
+                  Is parking available?
+                </button>
+              </h6>
+              <div id="faqTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body px-0 pt-0 pb-3">
+                  Yes, we offer complimentary valet parking for all our guests throughout their stay.
+                </div>
+              </div>
+            </div>
+            
+            <div class="accordion-item border-0 bg-transparent">
+              <h6 class="accordion-header">
+                <button class="accordion-button collapsed bg-transparent text-white px-0" type="button" data-bs-toggle="collapse" data-bs-target="#faqThree">
+                  Do you have pet-friendly rooms?
+                </button>
+              </h6>
+              <div id="faqThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body px-0 pt-0 pb-3">
+                  We have limited pet-friendly rooms available. Please contact us in advance to arrange for pet accommodations.
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-4">
+            <a href="booking.html" class="btn btn-accent w-100">Book Your Stay</a>
+          </div>
+        </div>
+      </div>
+      
+      <hr class="my-4">
+      
+      <div class="row">
+        <div class="col-md-6 text-center text-md-start">
+          <p class="mb-0">&copy; 2025 LuxeStay. All rights reserved.</p>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <p class="mb-0">
+            <a href="#" class="text-white-50 me-3">Privacy Policy</a>
+            <a href="#" class="text-white-50 me-3">Terms of Service</a>
+            <a href="#" class="text-white-50">Sitemap</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <a href="#" class="btn btn-primary btn-lg back-to-top" style="position: fixed; bottom: 20px; right: 20px; display: none;">
+    <i class="fas fa-arrow-up"></i>
+  </a>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  
+  <script>
+    // Initialize Swiper
+    const roomSwiper = new Swiper('.roomSwiper', {
+      loop: true,
+      grabCursor: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      slidesPerView: 1,
+      spaceBetween: 20,
+      breakpoints: {
+        576: { slidesPerView: 2 },
+        768: { slidesPerView: 2 },
+        992: { slidesPerView: 3 },
+        1200: { slidesPerView: 4 }
+      }
+    });
+    
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+    
+    // Back to top button
+    const backToTopButton = document.querySelector('.back-to-top');
+    window.addEventListener('scroll', function() {
+      if (window.pageYOffset > 300) {
+        backToTopButton.style.display = 'block';
+      } else {
+        backToTopButton.style.display = 'none';
+      }
+    });
+    
+    backToTopButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    });
+    
+    // Animation on scroll
+    function animateOnScroll() {
+      const elements = document.querySelectorAll('.fade-in');
+      
+      elements.forEach(element => {
+        const elementPosition = element.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        
+        if (elementPosition < windowHeight - 100) {
+          element.style.opacity = '1';
+          element.style.transform = 'translateY(0)';
+        }
+      });
+    }
+    
+    // Set initial state for animated elements
+    document.querySelectorAll('.fade-in').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    });
+    
+    // Add scroll event listener
+    window.addEventListener('scroll', animateOnScroll);
+    
+    // Trigger once on page load
+    window.addEventListener('load', animateOnScroll);
+    animateOnScroll();
+
+  </script>
+  
+  
+  <!-- Add Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+  // Initialize the map when the page loads
+  document.addEventListener('DOMContentLoaded', function() {
+    try {
+      // Coordinates for your hotel (example uses Mumbai)
+      const hotelLocation = [19.0760, 72.8777];
+      
+      // Create the map
+      const map = L.map('map').setView(hotelLocation, 15);
+      
+      // Add OpenStreetMap tiles
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+      
+      // Custom hotel icon
+      const hotelIcon = L.icon({
+        iconUrl: 'https://cdn-icons-png.flaticon.com/512/2776/2776067.png',
+        iconSize: [40, 40],
+        iconAnchor: [20, 40],
+        popupAnchor: [0, -40]
+      });
+      
+      // Add marker with popup
+      L.marker(hotelLocation, {icon: hotelIcon})
+        .addTo(map)
+        .bindPopup(`
+          <div class="map-info-window">
+            <h5>LuxeStay Hotel</h5>
+            <p>123 Luxury Avenue</p>
+            <p>Mumbai, Maharashtra 400001</p>
+            <p><i class="fas fa-phone"></i> +91 22 1234 5678</p>
+            <a href="https://www.openstreetmap.org/directions?from=&to=19.0760,72.8777#map=15/19.0760/72.8777" 
+               target="_blank" 
+               class="btn btn-sm btn-primary mt-2">
+              Get Directions
+            </a>
+          </div>
+        `)
+        .openPopup();
+        
+    } catch (error) {
+      console.error("Map initialization failed:", error);
+      // Fallback is already in the HTML
+    }
+  });
+</script>
+</body>
+</html>

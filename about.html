@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | LuxeStay Hotel</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #0077b6;
+      --secondary-color: #48cae4;
+      --accent-color: #ff9e00;
+      --dark-color: #001f3f;
+      --light-color: #f8f9fa;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .hero-section {
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                  url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover;
+      height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+      animation: fadeInDown 1s ease;
+    }
+
+    .hero-section p {
+      font-size: 1.3rem;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+      animation: fadeIn 1.5s ease;
+    }
+
+    .scroll-down {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 2rem;
+      animation: bounce 2s infinite;
+      cursor: pointer;
+    }
+
+    .about-section {
+      padding: 80px 0;
+      background-color: white;
+    }
+
+    .section-title {
+      position: relative;
+      margin-bottom: 60px;
+      text-align: center;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--dark-color);
+      margin-bottom: 1rem;
+    }
+
+    .section-title p {
+      font-size: 1.2rem;
+      color: #666;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--accent-color);
+      border-radius: 2px;
+    }
+
+    .about-content {
+      margin-bottom: 60px;
+    }
+
+    .about-content p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .feature-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
+
+    .feature-img {
+      height: 220px;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .feature-content {
+      padding: 25px;
+    }
+
+    .feature-content h3 {
+      font-size: 1.5rem;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .feature-content p {
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .feature-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.8rem;
+      margin: -35px auto 20px;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .stats-section {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      padding: 80px 0;
+      color: white;
+      text-align: center;
+    }
+
+    .stat-item {
+      padding: 20px;
+    }
+
+    .stat-number {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .stat-label {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    .team-section {
+      padding: 80px 0;
+      background-color: #f8f9fa;
+    }
+
+    .team-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      margin-bottom: 30px;
+    }
+
+    .team-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    }
+
+    .team-img {
+      height: 300px;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .team-content {
+      padding: 25px;
+      text-align: center;
+    }
+
+    .team-content h4 {
+      font-size: 1.5rem;
+      color: var(--dark-color);
+      margin-bottom: 5px;
+    }
+
+    .team-content p {
+      color: var(--primary-color);
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .social-links a {
+      color: var(--primary-color);
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: var(--accent-color);
+      transform: translateY(-3px);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInDown {
+      from { 
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to { 
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+      40% { transform: translateY(-20px) translateX(-50%); }
+      60% { transform: translateY(-10px) translateX(-50%); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .hero-section h1 {
+        font-size: 3rem;
+      }
+      
+      .hero-section p {
+        font-size: 1.1rem;
+      }
+      
+      .section-title h2 {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-section {
+        height: 60vh;
+      }
+      
+      .hero-section h1 {
+        font-size: 2.5rem;
+      }
+      
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .stat-number {
+        font-size: 2.5rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .hero-section {
+        height: 50vh;
+      }
+      
+      .hero-section h1 {
+        font-size: 2rem;
+      }
+      
+      .section-title h2 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <h1>About LuxeStay</h1>
+      <p>Where luxury meets comfort, and every stay becomes an unforgettable experience</p>
+    </div>
+    <div class="scroll-down" onclick="document.querySelector('.about-section').scrollIntoView({ behavior: 'smooth' })">
+      <i class="fas fa-chevron-down"></i>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Our Story</h2>
+        <p>Discover the legacy behind LuxeStay and our commitment to excellence</p>
+      </div>
+      
+      <div class="about-content">
+        <p>
+          Founded in 2010, LuxeStay began as a vision to redefine luxury hospitality. What started as a single boutique property has now grown into a globally recognized brand, known for its impeccable service and attention to detail.
+        </p>
+        <p>
+          At LuxeStay, we believe true luxury lies in the details - from the thread count of our linens to the personalized service we provide. Our team undergoes rigorous training to ensure every guest experiences the highest standard of hospitality.
+        </p>
+        <p>
+          Sustainability is at our core. We've implemented eco-friendly practices throughout our operations, from energy-efficient systems to locally sourced organic amenities, without compromising on luxury.
+        </p>
+      </div>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Luxury Pool" class="feature-img">
+          <div class="feature-icon">
+            <i class="fas fa-swimming-pool"></i>
+          </div>
+          <div class="feature-content">
+            <h3>Infinity Pool</h3>
+            <p>Our temperature-controlled infinity pool offers panoramic city views and private cabanas with butler service.</p>
+            <a href="#" class="btn btn-outline-primary">Explore</a>
+          </div>
+        </div>
+        
+        <div class="feature-card">
+          <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Fine Dining" class="feature-img">
+          <div class="feature-icon">
+            <i class="fas fa-utensils"></i>
+          </div>
+          <div class="feature-content">
+            <h3>Gourmet Dining</h3>
+            <p>Three award-winning restaurants featuring world-renowned chefs and farm-to-table cuisine.</p>
+            <a href="#" class="btn btn-outline-primary">View Menus</a>
+          </div>
+        </div>
+        
+        <div class="feature-card">
+          <img src="https://img.freepik.com/free-photo/spa-products-with-orchids_93675-128366.jpg?uid=R197981985&ga=GA1.1.1799789716.1745864655&semt=ais_hybrid&w=740" alt="Spa & Wellness" class="feature-img">
+          <div class="feature-icon">
+            <i class="fas fa-spa"></i>
+          </div>
+          <div class="feature-content">
+            <h3>Serenity Spa</h3>
+            <p>15,000 sq ft wellness center offering holistic treatments and state-of-the-art fitness facilities.</p>
+            <a href="#" class="btn btn-outline-primary">View Services</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-6 stat-item">
+          <div class="stat-number">12+</div>
+          <div class="stat-label">Years of Excellence</div>
+        </div>
+        <div class="col-md-3 col-6 stat-item">
+          <div class="stat-number">150+</div>
+          <div class="stat-label">Luxury Rooms</div>
+        </div>
+        <div class="col-md-3 col-6 stat-item">
+          <div class="stat-number">98%</div>
+          <div class="stat-label">Guest Satisfaction</div>
+        </div>
+        <div class="col-md-3 col-6 stat-item">
+          <div class="stat-number">24/7</div>
+          <div class="stat-label">Concierge Service</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Meet Our Leadership</h2>
+        <p>The passionate team dedicated to creating exceptional experiences</p>
+      </div>
+      
+      <div class="row">
+        <div class="col-lg-3 col-md-6">
+          <div class="team-card">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80" alt="CEO" class="team-img">
+            <div class="team-content">
+              <h4>Rajiv Kapoor</h4>
+              <p>Founder & CEO</p>
+              <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6">
+          <div class="team-card">
+            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80" alt="General Manager" class="team-img">
+            <div class="team-content">
+              <h4>Priya Sharma</h4>
+              <p>General Manager</p>
+              <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6">
+          <div class="team-card">
+            <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Head Chef" class="team-img">
+            <div class="team-content">
+              <h4>Arjun Patel</h4>
+              <p>Executive Chef</p>
+              <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-6">
+          <div class="team-card">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1061&q=80" alt="Spa Director" class="team-img">
+            <div class="team-content">
+              <h4>Neha Gupta</h4>
+              <p>Spa Director</p>
+              <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Smooth scrolling for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Animation on scroll
+    const animateOnScroll = () => {
+      const elements = document.querySelectorAll('.feature-card, .team-card, .stat-item');
+      
+      elements.forEach(element => {
+        const elementPosition = element.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        
+        if (elementPosition < windowHeight - 100) {
+          element.style.opacity = '1';
+          element.style.transform = 'translateY(0)';
+        }
+      });
+    };
+
+    // Set initial state for animated elements
+    document.querySelectorAll('.feature-card, .team-card, .stat-item').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'all 0.6s ease';
+    });
+
+    // Add scroll event listener
+    window.addEventListener('scroll', animateOnScroll);
+    
+    // Trigger once on page load
+    window.addEventListener('load', animateOnScroll);
+    animateOnScroll();
+  </script>
+</body>
+</html>
